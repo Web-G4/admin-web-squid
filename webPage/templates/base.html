@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection"/>
+		{% block title %}
+        {% endblock %}
+   	</head>
+   	<body>
+   		<header>
+   			<nav>
+   				<div class="nav-wrapper container">
+   					<a href="" class="center brand-logo">{% block title %}{% endblock %}</a>
+   					<ul class="side-nav" id="side">
+   						{% block sidenav %}
+            			{% endblock %}
+   					</ul>
+   				</div>
+   			</nav>
+		</header>
+		<main>
+			{% block content %}
+            {% endblock %}
+		</main>
+	</body>
+	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+	{% block scripts %}
+	{% endblock %}
+</html>
