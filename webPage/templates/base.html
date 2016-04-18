@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
     <head>
     	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
-		{% block title %}
-        {% endblock %}
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
    	</head>
    	<body>
    		<header>
