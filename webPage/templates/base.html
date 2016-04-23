@@ -2,31 +2,44 @@
 {% load staticfiles %}
 <html>
     <head>
-    	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
         <title>
             {% block title %}
             {% endblock %}
         </title>
-   	</head>
-   	<body>
-   		<header>
-   			<nav>
-   				<div class="nav-wrapper container">
-   					<a href="" class="center brand-logo">{% block header %}{% endblock %}</a>
-   					<ul class="side-nav fixed" id="side">
-   						{% block sidenav %}
-            			{% endblock %}
-   					</ul>
-   				</div>
-   			</nav>
-		</header>
-		<main>
-			{% block content %}
+    </head>
+    <body>
+        <header>
+            <nav role="navigation">
+                <div class="nav-wrapper">
+                    <div class="container">
+                        <a class="brand-logo center">{% block header %}{% endblock %}</a>
+                        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </div>
+                    <ul id="nav-mobile" class="side-nav fixed">
+                        <li class="logo">
+                            <a id="logo-container" href="index.html" class="brand-logo">
+                                <object id="front-page-logo" type="image/svg+xml" data="{% static 'res/logo.svg' %}">No soporta SVG.</object>
+                            </a>
+                        </li>
+                        <li class="bold"><a href="{% url 'webPage:index' %}" class="waves-effect">Inicio</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
             {% endblock %}
-		</main>
-	</body>
-	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-	{% block scripts %}
-	{% endblock %}
+        </main>
+    </body>
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script>
+        $(".button-collapse").sideNav();
+    </script>
+    {% block scripts %}
+    {% endblock %}
 </html>
