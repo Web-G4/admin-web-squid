@@ -6,3 +6,7 @@ def index(request):
     context = RequestContext(request)
     return render_to_response('index.html',
                               context)
+def reglas(request):
+    context = RequestContext(request)
+    return render_to_response('reglas.html',
+                              context)
