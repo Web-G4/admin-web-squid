@@ -27,6 +27,7 @@
                         </li>
                         <li class="bold"><a href="{% url 'webPage:index' %}" class="waves-effect">Inicio</a></li>
                         <li class="bold"><a href="{% url 'webPage:reglas' %}" class="waves-effect">Reglas</a></li>
+                        <li class="bold"><a href="{% url 'webPage:addReglas' %}" class="waves-effect">Añadir Reglas</a></li>
                     </ul>
                 </div>
             </nav>
@@ -38,6 +39,7 @@
     </body>
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/nouislider.min.js' %}"></script>
     <script>
         $(".button-collapse").sideNav();
     </script>
