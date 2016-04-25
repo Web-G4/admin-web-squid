@@ -10,3 +10,7 @@ def reglas(request):
     context = RequestContext(request)
     return render_to_response('reglas.html',
                               context)
+def addReglas(request):
+    context = RequestContext(request)
+    return render_to_response('addReglas.html',
+                              context)
