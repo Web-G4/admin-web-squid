@@ -21,8 +21,8 @@
                     </div>
                     <ul id="nav-mobile" class="side-nav fixed">
                         <li class="logo">
-                            <a id="logo-container" href="index.html" class="brand-logo">
-                                <object id="front-page-logo" type="image/svg+xml" data="{% static 'res/logo.svg' %}">No soporta SVG.</object>
+                            <a id="logo-container" href="{% url 'webPage:index' %}" class="brand-logo">
+                                <object id="front-page-logo" type="image/svg+xml" data="{% static 'img/logo1.svg' %}"></object>
                             </a>
                         </li>
                         <li class="bold"><a href="{% url 'webPage:index' %}" class="waves-effect">Inicio</a></li>
@@ -39,7 +39,6 @@
     </body>
     <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/nouislider.min.js' %}"></script>
     <script>
         $(".button-collapse").sideNav();
     </script>
