@@ -21,7 +21,7 @@ CONSTRAINT PK_Privilege PRIMARY KEY (namePrivilege));
 CREATE TABLE IF NOT EXISTS Surfer(
 username VARCHAR(20),
 pass VARCHAR(20),
-namePrivilege VARCHAR(20) NOT NULL,
+namePrivilege VARCHAR(20),
 CONSTRAINT PK_Surfer PRIMARY KEY (username),
 CONSTRAINT FK_Surfer_Privilege FOREIGN KEY (namePrivilege) REFERENCES Privilege(namePrivilege));
 
@@ -29,11 +29,13 @@ CREATE TABLE IF NOT EXISTS Rule(
 nameURL VARCHAR(50),
 idRule INT UNSIGNED AUTO_INCREMENT,
 isContent BOOLEAN,
+namePrivilege VARCHAR(20),
 description TEXT,
 allow BOOLEAN,
 rFrom TIME,
 rTo TIME,
-CONSTRAINT PK_Rule PRIMARY KEY (idRule));
+CONSTRAINT PK_Rule PRIMARY KEY (idRule),
+CONSTRAINT FK_Rule_Surfer FOREIGN KEY (namePrivilege) REFERENCES Privilege(namePrivilege));
 
 CREATE TABLE IF NOT EXISTS ActiveUser(
 idActiveUser INT UNSIGNED AUTO_INCREMENT,
