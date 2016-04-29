@@ -28,9 +28,9 @@ CONSTRAINT FK_Surfer_Privilege FOREIGN KEY (namePrivilege) REFERENCES Privilege(
 
 CREATE TABLE IF NOT EXISTS Rule(
 nameURL VARCHAR(50),
-idRule INT AUTO_INCREMENT UNSIGNED,
+idRule INT UNSIGNED AUTO_INCREMENT,
 isContent BOOLEAN,
-nameSurfer VARCHAR(30),
+nameSurfer VARCHAR(20),
 description TEXT,
 allow BOOLEAN,
 rFrom TIME,
@@ -39,15 +39,15 @@ CONSTRAINT PK_Rule PRIMARY KEY (idRule),
 CONSTRAINT FK_Rule_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(username));
 
 CREATE TABLE IF NOT EXISTS ActiveUser(
-idActiveUser INT AUTO_INCREMENT UNSIGNED,
+idActiveUser INT UNSIGNED AUTO_INCREMENT,
 ipSurfer INT UNSIGNED,
-nameSurfer VARCHAR(30),
+nameSurfer VARCHAR(20),
 CONSTRAINT PK_ActiveUser PRIMARY KEY (idActiveUser),
 CONSTRAINT FK_ActiveUser_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(username));
 
 CREATE TABLE IF NOT EXISTS RuleList(
 surferAsigned VARCHAR(20),
-ruleAsigned INT,
+ruleAsigned INT UNSIGNED AUTO_INCREMENT,
 FOREIGN KEY (surferAsigned) REFERENCES Surfer(username),
 FOREIGN KEY (ruleAsigned) REFERENCES Rule(idRule));
 
