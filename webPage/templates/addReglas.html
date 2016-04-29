@@ -7,85 +7,56 @@ Reglas
 Reglas
 {% endblock %}
 {% block content %}
-<link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.css' %}"/>
-<div class="section">
-    <div class="container">
-        <div class="col s12 m12 l12">
-            <div class="card blue-grey">
-                <div class="valign-wrapper row" style="min-height:60px;">
-                    <div id="slider" class="col s10 offset-s1 valign"></div>
-                </div>
+<div class="container">
+    <div class="row">
+        <form class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+            <div class="input-field col s9">
+                <input id="rule_name" type="text" class="validate formy">
+                <label for="rule_name">URL</label>
             </div>
-
-            <div class="card blue-grey darken-1">
-                <select id="cmb">
-                    <option value="" disabled selected>Choose your option</option>
-                </select>
-                <div class="left">
-                    <p class="check-inline">
-                        <label for="from_hour">Desde:</label>
-                        <input type="text" class="white-text" id="from_hour" value="02:00"/>
-                    </p>
-                    <p class="check-inline">
-                        <label for="to_hour">Hasta:</label>
-                        <input type="text" class="white-text" id="to_hour" value="21:00"/>
-                    </p>
-                </div>
+            <div class="valign-wrapper switch col s3" style="padding-top:30px;padding-left:35px">
+                <label class="valign">
+                    Off
+                    <input type="checkbox" id="check">
+                    <span class="lever"></span>
+                    On
+                </label>
             </div>
-        </div>
+            <div class="input-field col s12">
+                <textarea id="rule_desc" class="materialize-textarea formy"></textarea>
+            <div class="input-field col s6">
+                <input id="rule_start_hour" type="text" class="validate formy">
+                <label for="rule_start_hour">Hasta</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="rule_finish_hour" type="text" class="validate formy">
+                <label for="rule_finish_hour">Desde</label>
+            </div>
+            <div class="right">
+                <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
+                <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+            </div>
+        </form>
     </div>
 </div>
+
+
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/nouislider.min.js' %}"></script>
+
 <script>
-    var slider = document.getElementById('slider');
-    noUiSlider.create(slider, {
-        start: ["08:00","16:00"],
-        connect: true,
-        step: 1,
-        range: {
-            'min': 0,
-            'max': 1439
-        },
-        format:{
-            to: minutesToHHMM,
-            from: HHMMtoMinutes
-        },
-    });
-    slider.noUiSlider.on('update', function() {
-        hour = slider.noUiSlider.get();
-        $("#from_hour").attr("value", hour[0]);
-        $("#to_hour").attr("value", hour[1]);
-    });
-    var valueInputF = document.getElementById('from_hour');
-    var valueInputT = document.getElementById('to_hour');
-    slider.noUiSlider.on('update', function( values, handle ) {
-        if ( handle ) {
-            valueInputT.value = values[handle];
-        } else {
-            valueInputF.value = values[handle];
-        }
-    });
-    valueInputT.addEventListener('change', function(){
-        slider.noUiSlider.set([null, this.value]);
-    });
-    valueInputF.addEventListener('change', function(){
-        slider.noUiSlider.set([this.value, null]);
-    });
-
-    function minutesToHHMM(value) {
-        value = Math.round(value);
-        var hour = Math.floor(value / 60);
-        var min = value - hour * 60;
-        return ("0" + hour).slice(-2) + ":" + ("0" + min).slice(-2);
+  //Accion del Boton Cancelar
+  $("#cancel").click(
+    function(){
+      borrarCampos($(".formy"));
+      //TODO checkbox disabler
     }
-    function HHMMtoMinutes(value) {
-        var split = value.toString().split(":");
-        var hour = parseInt(split[0]) * 60;
-        var min = parseInt(split[1]);
-        return hour + min;
-    }
+  );
 
+  //Borrar todo el contenido de lo  que tenga el objeto
+  function borrarCampos(ob){
+    ob.val(null);
+    console.log("Campos Borrados!");
+  }
 </script>
 {% endblock %}
 {% block scripts %}
