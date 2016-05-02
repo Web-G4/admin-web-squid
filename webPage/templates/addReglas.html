@@ -10,9 +10,12 @@ Reglas
 <div class="container">
     <div class="row">
         <form class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
-            <div class="input-field col s9">
+            <div class="input-field col s8">
                 <input id="rule_name" type="text" class="validate formy">
                 <label for="rule_name">URL</label>
+            </div>
+            <div id="dropbtn" class="col s1">
+              <i id="dropbtn-trigger" class="fa fa-3x fa-caret-down"></i>
             </div>
             <div class="valign-wrapper switch col s3" style="padding-top:30px;padding-left:35px">
                 <label class="valign">
@@ -46,11 +49,16 @@ Reglas
 <script>
   //Accion del Boton Cancelar
   $("#cancel").click(
-    function(){
-      borrarCampos($(".formy"));
-      //TODO checkbox disabler
+      function(){
+      borrarTodo($(".formy"));
     }
   );
+
+  function borrarTodo(quecosas){
+    borrarCampos(quecosas);
+    //Uncheck the Checkbox
+    $('#check').attr('checked', false)
+  }
 
   //Borrar todo el contenido de lo  que tenga el objeto
   function borrarCampos(ob){
