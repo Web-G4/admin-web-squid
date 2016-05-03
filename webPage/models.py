@@ -34,9 +34,9 @@ class Privilege(models.Model):
 class Rule(models.Model):
     nameurl = models.CharField(db_column='nameURL', max_length=50, blank=True, null=True)  # Field name made lowercase.
     idrule = models.AutoField(db_column='idRule', primary_key=True)  # Field name made lowercase.
-    iscontent = models.IntegerField(db_column='isContent', blank=True, null=True)  # Field name made lowercase.
+    iscontent = models.BooleanField(db_column='isContent', default=True)  # Field name made lowercase.
     description = models.TextField(blank=True, null=True)
-    allow = models.IntegerField(blank=True, null=True)
+    allow = models.BooleanField(default=True)
     rfrom = models.TimeField(db_column='rFrom', blank=True, null=True)  # Field name made lowercase.
     rto = models.TimeField(db_column='rTo', blank=True, null=True)  # Field name made lowercase.
 
