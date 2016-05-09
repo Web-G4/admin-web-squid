@@ -49,3 +49,16 @@ logo-container{
 #dropbtn {
     margin-top:16px;
 }
+
+.hidden {
+    display:none;
+}
+.parent:hover .hidden {
+    display:block;
+}
+
+.inline{
+    display: inline;
+    margin-left: 4px;
+    cursor:pointer;
+}

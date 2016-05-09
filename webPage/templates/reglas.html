@@ -13,9 +13,9 @@ Reglas
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s3"><a href="#test1">Recursos Humanos</a></li>
-                        <li class="tab col s3"><a class="active" href="#test2">Produccion</a></li>
-
+                        {% for priv in privileges %}
+                        <li class="tab col s3"><a class="active" href="#test2">{{priv.nameprivilege}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div id="test1" class="col s12"><table>
@@ -33,12 +33,23 @@ Reglas
                             <td>CACA</td>
                             <td>PIS</td>
                             <td><input type="checkbox" id="usuario1"/><label for="usuario1"></label></td>
-                            <td><i class="fa fa-pencil" id="edit1"><p></p><i class="fa fa-trash" id="trash1"><p></p><i class="fa fa-power-off" id="power-off1"></td>
-                                </tr>
+                            <td><div class="fixed-action-btn vertical">
+                                <a class="btn-floating btn-large red">
+                                    <i class="fa fa-edit" id="trash1"></i>
+                                </a>
+                                <ul>
+                                    <li><a class="btn-floating red"><i class="fa fa-trash" id="trash1"></i></a></li>
+                                    <li><a class="btn-floating yellow darken-1"><i class="fa fa-pencil" id="edit1"></i></a></li>
+                                    <li><a class="btn-floating green"><i class="fa fa-power-off" id="power-off1"></i></a></li>
 
-                                </tbody>
+                                </ul>
+                                </div></td>
+                        </tr>
+
+                    </tbody>
                     </table></div>
-                    <div id="test2" class="col s12"><table>
+                <div id="test2" class="col s12">
+                    <table class="highlight">
                         <thead>
                             <tr>
                                 <th data-field="id">Name</th>
@@ -50,37 +61,60 @@ Reglas
 
                         <tbody>
                             {% for regla in reglas %}
-                            <tr>
+                            <tr class="parent">
                                 <td>{{regla.nameurl}}</td>
                                 <td>{{regla.description}}</td>
                                 <td><input type="checkbox" id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
                                 <td>
-                                    <div class="fixed-action-btn vertical">
-                                        <a class="btn-floating btn-large red">
-                                            <i class="fa fa-edit" id="trash1"></i>
-                                        </a>
-                                        <ul>
-                                            <li><a class="btn-floating red"><i class="fa fa-trash" id="trash1"></i></a></li>
-                                            <li><a class="btn-floating yellow darken-1"><i class="fa fa-pencil" id="edit1"></i></a></li>
-                                            <li><a class="btn-floating green"><i class="fa fa-power-off" id="power-off1"></i></a></li>
+                                    <ul class="right hidden">
+                                        <li class="inline"><i class="fa fa-trash" id="trash1-{{regla.idrule}}"></i></li>
+                                        <li class="inline"><i class="fa fa-pencil" id="edit1-{{regla.idrule}}"></i></li>
+                                        <li class="inline"><i class="fa fa-power-off" id="power-off1-{{regla.idrule}}"></i></li>
+                                    </ul>
+                                    <!-- <div class="fixed-action-btn horizontal">
+<a class="btn-floating btn-large">
+<i class="fa fa-edit" id="trash1-{{regla.idrule}}"></i>
+</a>
+<ul>
+<li><a class="btn-floating red"><i class="fa fa-trash" id="trash1-{{regla.idrule}}"></i></a></li>
+<li><a class="btn-floating yellow darken-1"><i class="fa fa-pencil" id="edit1-{{regla.idrule}}"></i></a></li>
+<li><a class="btn-floating green"><i class="fa fa-power-off" id="power-off1-{{regla.idrule}}"></i></a></li>
 
-                                        </ul>
-                                    </div>
+</ul>
+</div>-->
                                 </td>
                             </tr>
                             {% endfor %}
 
                         </tbody>
-                        </table>
-                    </div>
-
+                    </table>
                 </div>
 
             </div>
+
         </div>
     </div>
+</div>
 
 
-    {% endblock %}
-    {% block scripts %}
-    {% endblock %}
+{% endblock %}
+{% block scripts %}
+<script>
+    $.ajax({
+        type: "POST",
+        url: "{% url 'webPage:reglas' %}",
+        data: data,
+        statusCode:{
+            202 : function(){
+                myPlaylist.add({
+                    title:$(titleId).html(),
+                    artist:$(authorId).html(),
+                    mp3: mp3,
+                    album:$("#album-"+id).html(),
+                });
+            },
+        },
+
+    });
+</script>
+{% endblock %}
