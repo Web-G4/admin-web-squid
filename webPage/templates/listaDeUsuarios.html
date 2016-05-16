@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Lista de Usuarios
+{% endblock %}
+{% block header %}
+Lista de Usuarios
+{% endblock %}
+{% block content %}
+
+
+<table class="highlight container" >
+    <thead>
+        <tr>
+            <th data-field="id">Usuario</th>
+            <th data-field="name">Privilegios</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{usuario.username}}</td>
+            <td>
+                <select id="select_dropdown">
+                    {% for privilegio in privilegios %}
+                    {%ifequal privilegio.nameprivilege usuario.nameprivilege.nameprivilege%}
+                    <option value="{{forloop.counter}}" selected>{{privilegio.nameprivilege}}</option>
+                    {% else %}
+                    <option value="{{forloop.counter}}">{{privilegio.nameprivilege}}</option>
+                    {% endifequal %}
+                    {% endfor %}
+                </select>
+            </td>
+            <td>
+
+                <a id="{{usuario.username}}"class="waves-effect waves-light btn">Guardar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>  
+    $(document).ready(function() {
+        $('select').material_select();
+        //<AJAX
+        $('#save').click(function(){
+            var e = document.getElementById("select_dropdown");
+            var valuess = e.options[e.selectedIndex].value;
+            console.log(valuess);
+            var data={
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                dato:valuess,
+            }
+            $.ajax({
+                type: "POST",
+                url: "{% url 'webPage:listaDeUsuarios' %}",
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    console.log("Success")
+                },
+                error: function(err){
+                    console.alert("Hubo un problema intentalo de nuevo.")
+                },
+            });
+        });
+    });
+    //AJAX>
+</script>
+{% endblock %}
