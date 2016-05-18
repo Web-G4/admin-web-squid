@@ -17,6 +17,13 @@ def addReglas(request):
 def addUsuario(request):
     context = RequestContext(request)
     privileges = Privilege.objects.all()
+    if request.method=='POST':
+        sur = Surfer()
+        sur.username = request.POST['u_nom']
+        sur.pass_field = request.POST['u_pass']
+        sur.nameprivilege = Privilege.objects.get(nameprivilege=request.POST['u_priv'])
+        sur.save()
+
     return render_to_response('addUsuario.html',{'privilegios':privileges},context)
 
 def listUsuarios(request):

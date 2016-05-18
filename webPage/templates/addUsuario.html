@@ -9,31 +9,28 @@ Registro
 {% block content %}
 <div class="container">
     <div class="row">
-        <form class="card col s8 offset-s2 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+        <form action="{% url 'webPage:addUsuario' %}" method="POST" enctype="multipart/form-data" class="card col s8 offset-s2 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+            {% csrf_token %}
             <div class="input-field col s8 offset-s2">
-                <input id="nomb" type="text" class="validate formy" name="nomb">
-                <label for="nomb">Nombre de Usuario</label>
+                <input id="u_nom" type="text" class="validate formy" name="u_nom">
+                <label for="u_nom">Nombre de Usuario</label>
             </div>
             <div class="input-field col s8 offset-s2">
-                <input id="contra" type="password" class="validate formy" name="contra1">
-                <label for="contra">Contraseña</label>
+                <input id="u_pass" type="password" class="validate formy" name="u_pass">
+                <label for="u_pass">Contraseña</label>
             </div>
             <div class="input-field col s8 offset-s2">
-                <input id="contra2" type="password" class="validate formy" name="contra2">
-                <label for="contra2">Verifique contraseña</label>
-            </div>
-            <div class="input-field col s8 offset-s2">
-                <select>
+                <select name="u_priv">
                     <option value="" disabled selected>Seleccione privilegio</option>
                     {% for privilegio in privilegios %}
-                    <option value="{{privilegio.id}}">{{privilegio.nameprivilege}}</option>
+                    <option value="{{privilegio.nameprivilege}}">{{privilegio.nameprivilege}}</option>
                     {% endfor %}
                 </select>
                 <label>Privilegio</label>
             </div>
             <div class="center col s8 offset-s2">
-                <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
-                <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+                <button id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</button>
+                <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Aceptar</button>
             </div>
         </form>
     </div>

@@ -99,22 +99,4 @@ Reglas
 
 {% endblock %}
 {% block scripts %}
-<script>
-    $.ajax({
-        type: "POST",
-        url: "{% url 'webPage:reglas' %}",
-        data: data,
-        statusCode:{
-            202 : function(){
-                myPlaylist.add({
-                    title:$(titleId).html(),
-                    artist:$(authorId).html(),
-                    mp3: mp3,
-                    album:$("#album-"+id).html(),
-                });
-            },
-        },
-
-    });
-</script>
 {% endblock %}
