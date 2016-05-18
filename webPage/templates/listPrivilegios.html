@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Lista de Privilegios
+{% endblock %}
+{% block header %}
+Lista de Privilegios
+{% endblock %}
+{% block content %}
+
+
+<table class="highlight container" >
+    <thead>
+        <tr>
+            <th data-field="name">Privilegios</th>
+            <th data-field="is">Bloqueado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for privilegio in privilegios %}
+        <tr>
+            <td>{{privilegio.nameprivilege}}</td>
+            <td>{{privilegio.isblock}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="container row">
+    <form  action="{% url 'webPage:listPrivilegios' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-field col s8 m6 l6">
+            <input id="p_nom" type="text" name="p_nom">
+            <label for="p_nom">Nombre del Privilegio</label>
+        </div>
+        <div class="input-field col s1">
+            <input type="checkbox" id="p_is" name="p_is" value="1"/>
+            <label for="p_is"></label>
+        </div>
+        <div class="input-field col s2 m3 l3">
+            <button class="btn waves-effect waves-light btn light-green accent-4" type="submit" name="action">Submit          </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

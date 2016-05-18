@@ -22,13 +22,14 @@
                     </div>
                     <ul id="nav-mobile" class="side-nav fixed">
                         <li class="logo">
-                            <a id="logo-container" href="{% url 'webPage:index' %}" class="brand-logo">
+                            <a id="logo-container" href="{% url 'webPage:listUsuarios' %}" class="brand-logo">
                                 <object id="front-page-logo" type="image/svg+xml" data="{% static 'res/logo.svg' %}"></object>
                             </a>
                         </li>
-                        <li class="bold"><a href="{% url 'webPage:index' %}" class="waves-effect">Lista de Usuarios</a></li>
-                        <li class="bold"><a href="{% url 'webPage:registro' %}" class="waves-effect">Añadir Usuario</a></li>
-                        <li class="bold"><a href="{% url 'webPage:reglas' %}" class="waves-effect">Reglas</a></li>
+                        <li class="bold"><a href="{% url 'webPage:listUsuarios' %}" class="waves-effect">Lista de Usuarios</a></li>
+                        <li class="bold"><a href="{% url 'webPage:addUsuario' %}" class="waves-effect">Añadir Usuario</a></li>
+                        <li class="bold"><a href="{% url 'webPage:listPrivilegios' %}" class="waves-effect">Lista de Privilegios</a></li>
+                        <li class="bold"><a href="{% url 'webPage:listReglas' %}" class="waves-effect">Reglas</a></li>
                         <li class="bold"><a href="{% url 'webPage:addReglas' %}" class="waves-effect">Añadir Reglas</a></li>
                     </ul>
                 </div>

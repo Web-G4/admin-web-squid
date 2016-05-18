@@ -11,23 +11,23 @@ Registro
     <div class="row">
         <form class="card col s8 offset-s2 blue-grey lighten-5" style="padding:15px;margin-top:20px">
             <div class="input-field col s8 offset-s2">
-                <input id="rule_name" type="text" class="validate formy">
-                <label for="rule_name">Nombre de Usuario</label>
+                <input id="nomb" type="text" class="validate formy" name="nomb">
+                <label for="nomb">Nombre de Usuario</label>
             </div>
             <div class="input-field col s8 offset-s2">
-                <input id="rule_name" type="password" class="validate formy">
-                <label for="rule_name">Contraseña</label>
+                <input id="contra" type="password" class="validate formy" name="contra1">
+                <label for="contra">Contraseña</label>
             </div>
             <div class="input-field col s8 offset-s2">
-                <input id="rule_name" type="password" class="validate formy">
-                <label for="rule_name">Verifique contraseña</label>
+                <input id="contra2" type="password" class="validate formy" name="contra2">
+                <label for="contra2">Verifique contraseña</label>
             </div>
             <div class="input-field col s8 offset-s2">
                 <select>
-                    <option value="" >Seleccione privilegio</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                    <option value="" disabled selected>Seleccione privilegio</option>
+                    {% for privilegio in privilegios %}
+                    <option value="{{privilegio.id}}">{{privilegio.nameprivilege}}</option>
+                    {% endfor %}
                 </select>
                 <label>Privilegio</label>
             </div>
