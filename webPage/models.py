@@ -24,7 +24,7 @@ class Content(models.Model):
 
 class Privilege(models.Model):
     nameprivilege = models.CharField(db_column='namePrivilege', primary_key=True, max_length=20)  # Field name made lowercase.
-    isblock = models.IntegerField(db_column='isBlock', blank=True, null=True)  # Field name made lowercase.
+    isblock = models.BooleanField(db_column='isBlock', blank=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Registro
+{% endblock %}
+{% block header %}
+Registro
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form class="card col s8 offset-s2 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+            <div class="input-field col s8 offset-s2">
+                <input id="rule_name" type="text" class="validate formy">
+                <label for="rule_name">Nombre de Usuario</label>
+            </div>
+            <div class="input-field col s8 offset-s2">
+                <input id="rule_name" type="password" class="validate formy">
+                <label for="rule_name">Contraseña</label>
+            </div>
+            <div class="input-field col s8 offset-s2">
+                <input id="rule_name" type="password" class="validate formy">
+                <label for="rule_name">Verifique contraseña</label>
+            </div>
+            <div class="input-field col s8 offset-s2">
+                <select>
+                    <option value="" >Seleccione privilegio</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+                <label>Privilegio</label>
+            </div>
+            <div class="center col s8 offset-s2">
+                <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
+                <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}
