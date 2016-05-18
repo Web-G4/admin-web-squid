@@ -87,30 +87,5 @@ Añadir Reglas
     $(document).ready(function() {
         $('select').material_select();
     });
-
-=======
-
-    function borrarTodo(quecosas){
-        borrarCampos(quecosas);
-        //Uncheck the Checkbox
-        $('#check').attr('checked', false)
-    }
-
-    //Borrar todo el contenido de lo  que tenga el objeto
-    function borrarCampos(ob){
-        ob.val(null);
-        console.log("Campos Borrados!");
-    }
-    function change(){
-        $('#url').toggle();
-        $('#contenido').toggle();
-        $('#go_group').toggle();
-        $('#go_url').toggle();
-    }
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-
->>>>>>> origin/master
 </script>
 {% endblock %}
