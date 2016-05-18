@@ -78,9 +78,15 @@ WSGI_APPLICATION = 'adminWebSquid.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD:adminWebSquid/settings.py
         'NAME': '',
         'USER': '',
         'PASSWORD': '',
+=======
+        'NAME':'SEAWALL',
+	'USER':'root',
+	'PASSWORD':'281197',
+>>>>>>> origin/master:adminWebSquid/settings.py~
     }
 }
 
