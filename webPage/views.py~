@@ -36,4 +36,9 @@ def listaDeUsuarios(request):
         print("MODIFICA LA BASE DE DATOS")
     return render_to_response('listaDeUsuarios.html',{'usuarios':usuarios,'privilegios':privilegios},context)
 
+def privileges(request):
+    context = RequestContext(request)
+    privileges = Rule.objects.all()
+    return render_to_response({'privileges':privileges},
+                              context)
 

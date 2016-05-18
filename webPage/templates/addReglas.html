@@ -1,43 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Reglas
+Añadir Reglas
 {% endblock %}
 {% block header %}
-Reglas
+Añadir Reglas
 {% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
         <form class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
-            <div class="input-field col s8">
+            <div class="droptrigger input-field col s8" id="url">
                 <input id="rule_name" type="text" class="validate formy">
                 <label for="rule_name">URL</label>
             </div>
-            <div id="dropbtn" class="col s1">
-              <i id="dropbtn-trigger" class="fa fa-3x fa-caret-down"></i>
+            <div id="contenido" class="input-field col s8" style="display: none">
+                <select>
+                    <option value="" disabled selected>Seleccione un Grupo</option>
+                    <option value="1">Paginas de Juegos</option>
+                    <option value="2">Paginas de Adultos</option>
+                    <option value="3">Videos de Youtube</option>
+                </select>
+                <label>Contenido</label>
+            </div>
+            <div class="valign-wrapper col s1" style="padding-top:10px">
+                <i id="go_group" onclick="change()" class="fa fa-3x fa-caret-down"></i>
+                <i id="go_url" onclick="change()" class="fa fa-2x  fa-pencil" style="display: none"></i>
             </div>
             <div class="valign-wrapper switch col s3" style="padding-top:30px;padding-left:35px">
                 <label class="valign">
-                    Off
+                    Habilitar?
                     <input type="checkbox" id="check">
                     <span class="lever"></span>
-                    On
                 </label>
             </div>
             <div class="input-field col s12">
                 <textarea id="rule_desc" class="materialize-textarea formy"></textarea>
-            <div class="input-field col s6">
-                <input id="rule_start_hour" type="text" class="validate formy">
-                <label for="rule_start_hour">Hasta</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="rule_finish_hour" type="text" class="validate formy">
-                <label for="rule_finish_hour">Desde</label>
-            </div>
-            <div class="right">
-                <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
-                <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+                <label for="rule_desc">Descripción</label>
+                <div class="input-field col s6">
+                    <input id="rule_start_hour" type="text" class="validate formy">
+                    <label for="rule_start_hour">Hasta</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="rule_finish_hour" type="text" class="validate formy">
+                    <label for="rule_finish_hour">Desde</label>
+                </div>
+                <div class="right">
+                    <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
+                    <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+                </div>
             </div>
         </form>
     </div>
@@ -45,27 +56,36 @@ Reglas
 
 
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
 <script>
-  //Accion del Boton Cancelar
-  $("#cancel").click(
-      function(){
-      borrarTodo($(".formy"));
+    //Accion del Boton Cancelar
+    $("#cancel").click(
+        function(){
+            borrarTodo($(".formy"));
+        }
+    );
+
+    function borrarTodo(quecosas){
+        borrarCampos(quecosas);
+        //Uncheck the Checkbox
+        $('#check').attr('checked', false)
     }
-  );
 
-  function borrarTodo(quecosas){
-    borrarCampos(quecosas);
-    //Uncheck the Checkbox
-    $('#check').attr('checked', false)
-  }
+    //Borrar todo el contenido de lo  que tenga el objeto
+    function borrarCampos(ob){
+        ob.val(null);
+        console.log("Campos Borrados!");
+    }
+    function change(){
+        $('#url').toggle();
+        $('#contenido').toggle();
+        $('#go_group').toggle();
+        $('#go_url').toggle();
+    }
+    $(document).ready(function() {
+        $('select').material_select();
+    });
 
-  //Borrar todo el contenido de lo  que tenga el objeto
-  function borrarCampos(ob){
-    ob.val(null);
-    console.log("Campos Borrados!");
-  }
 </script>
-{% endblock %}
-{% block scripts %}
 {% endblock %}
