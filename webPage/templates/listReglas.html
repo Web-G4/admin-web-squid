@@ -28,9 +28,8 @@ Reglas
                 {% endif %}
                 <td>
                     <ul class="right hidden">
-                        <li class="inline"><i class="fa fa-trash" href="{% url 'webPage:addReglas' regla.idrule %}"></i></li>
-                        <li class="inline"><i class="fa fa-pencil" href="{{regla.idrule}}"></i></li>
-                        <li class="inline"><i class="fa fa-power-off" href="{{regla.idrule}}"></i></li>
+                        <li class="inline"><a href="{% url 'webPage:delRegla' regla.idrule %}"><i class="fa fa-trash"></i></a></li>
+                        <li class="inline"><a href="{% url 'webPage:modRegla' regla.idrule %}"><i class="fa fa-pencil"></i></a></li>
                     </ul>
                 </td>
             </tr>

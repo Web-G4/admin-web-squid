@@ -11,6 +11,35 @@ def listReglas(request):
     #reglas = lista.ruleasigned
     return render_to_response('listReglas.html',{'reglas':reglas, 'privileges':privileges},context)
 
+def delRegla(request, rId):
+    context = RequestContext(request)
+    rule = Rule.objects.get(idrule = rId)
+    rule.delete()
+    reglas = Rule.objects.all()
+    privileges = Privilege.objects.all()
+    return render_to_response('listReglas.html',{'reglas':reglas, 'privileges':privileges},context)
+
+def modRegla(request, rId):
+    context = RequestContext(request)
+    contenidos = Content.objects.all()
+    rule = Rule.objects.get(idrule = rId)
+    if request.method == 'POST':
+        if request.POST['r_name'] == "":
+            rule.nameurl = request.POST['r_name']
+            rule.iscontent = False
+        else:
+            #rule.nameurl = request.POST['r_cont']
+            rule.iscontent = True
+        if request.POST.getlist('r_is')==[u'1']:
+            rule.allow = True
+        else:
+            rule.allow = False
+        rule.description = request.POST['r_desc']
+        rule.rfrom =  datetime.strptime(request.POST['r_s_h'], '%d %m %Y %H:%M')
+        rule.rto = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
+        rule.save()
+    return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule},context)
+
 def addReglas(request):
     context = RequestContext(request)
     contenidos = Content.objects.all()
@@ -20,7 +49,7 @@ def addReglas(request):
             rule.nameurl = request.POST['r_name']
             rule.iscontent = False
         else:
-            #rule.nameurl = request.POST['r_cont']
+            rule.nameurl = request.POST['r_cont']
             rule.iscontent = True
         if request.POST.getlist('r_is')==[u'1']:
             rule.allow = True

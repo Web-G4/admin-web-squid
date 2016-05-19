@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Modificar Regla {{regla.idrule}}
+{% endblock %}
+{% block header %}
+Modificar Regla {{regla.idrule}}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form  action="{% url 'webPage:addReglas' %}" method="POST" enctype="multipart/form-data"  class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+            {% csrf_token %}
+            <div class="droptrigger input-field col s8" id="url">
+                <input id="r_name" type="text" class="validate formy" name="r_name" value="{% if not regla.iscontent %} regla.namerule {% endif %}">
+                <label for="r_name">URL</label>
+            </div>
+            <div id="contenido" class="input-field col s8" style="display: none">
+                <select name="r_cont">
+                    <option value="" disabled>Seleccione un Contenido</option>
+                    {% for contenido in contenidos %}
+                    {% if regla.iscontent %}
+                    <option value="{{contenido.namecontent}}" selected>{{contenido.namecontent}}</option>
+                    {% else %}
+                    <option value="{{contenido.namecontent}}">{{contenido.namecontent}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <label>Contenido</label>
+            </div>
+            <div class="valign-wrapper col s1" style="padding-top:10px">
+                <i id="go_group" onclick="change()" class="fa fa-3x fa-caret-down"></i>
+                <i id="go_url" onclick="change()" class="fa fa-2x  fa-pencil" style="display: none"></i>
+            </div>
+            <div class="valign-wrapper switch col s3" style="padding-top:30px;padding-left:35px">
+                <label class="valign">
+                    Habilitar?
+                    {% if regla.allow %}
+                    <input type="checkbox" checked id="check" name="r_is" value="1">
+                    {% else %}
+                    <input type="checkbox" id="check" name="r_is" value="1">
+                    {% endif %}
+                    <span class="lever"></span>
+                </label>
+            </div>
+            <div class="input-field col s12">
+                <textarea id="r_desc" class="materialize-textarea formy" name="r_desc" value="{{regla.description}}"></textarea>
+                <label for="r_desc">Descripción</label>
+                <div class="input-field col s6">
+                    <input id="r_s_h" type="text" class="validate formy" name="r_s_h" value="{{regla.rfrom}}">
+                    <label for="r_s_h">Hasta DD MM AAAA HH:MM</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="r_f_h" type="text" class="validate formy" name="r_f_h" value="{{regla.rto}}">
+                    <label for="r_f_h">Desde DD MM AAAA HH:MM</label>
+                </div>
+                <div class="right">
+                    <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
+                    <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Aceptar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
+<script>
+    //Accion del Boton Cancelar
+    $("#cancel").click(
+        function(){
+            borrarTodo($(".formy"));
+        }
+    );
+
+    function borrarTodo(quecosas){
+        borrarCampos(quecosas);
+        //Uncheck the Checkbox
+        $('#check').attr('checked', false)
+    }
+
+    //Borrar todo el contenido de lo  que tenga el objeto
+    function borrarCampos(ob){
+        ob.val(null);
+        console.log("Campos Borrados!");
+    }
+    function change(){
+        $('#url').toggle();
+        $('#contenido').toggle();
+        $('#go_group').toggle();
+        $('#go_url').toggle();
+    }
+</script>
+{% endblock %}
