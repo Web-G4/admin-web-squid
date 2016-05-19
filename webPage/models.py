@@ -37,8 +37,8 @@ class Rule(models.Model):
     iscontent = models.BooleanField(db_column='isContent', default=True)  # Field name made lowercase.
     description = models.TextField(blank=True, null=True)
     allow = models.BooleanField(default=True)
-    rfrom = models.TimeField(db_column='rFrom', blank=True, null=True)  # Field name made lowercase.
-    rto = models.TimeField(db_column='rTo', blank=True, null=True)  # Field name made lowercase.
+    rfrom = models.DateTimeField(db_column='rFrom', blank=True, null=True)  # Field name made lowercase.
+    rto = models.DateTimeField(db_column='rTo', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

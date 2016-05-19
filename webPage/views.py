@@ -60,8 +60,8 @@ def addReglas(request):
         else:
             rule.allow = False
         rule.description = request.POST['r_desc']
-        rule.rfrom =  datetime.strptime(request.POST['r_s_h'], '%d %m %Y %H:%M')
-        rule.rto = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
+        rule.rfrom =  datetime.strptime(request.POST['r_s_h'], '%Y %m %d %H:%M')
+        rule.rto = datetime.strptime(request.POST['r_f_h'], '%Y %m %d %H:%M')
         rule.save()
     return render_to_response('addReglas.html',{'contenidos':contenidos},context)
 
