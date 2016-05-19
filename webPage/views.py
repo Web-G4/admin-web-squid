@@ -24,11 +24,13 @@ def modRegla(request, rId):
     contenidos = Content.objects.all()
     rule = Rule.objects.get(idrule = rId)
     if request.method == 'POST':
-        if request.POST['r_name'] == "":
+        if request.POST['r_w']:
+            print request.POST['r_name']
             rule.nameurl = request.POST['r_name']
             rule.iscontent = False
         else:
-            #rule.nameurl = request.POST['r_cont']
+            print request.POST['r_desc']
+            rule.nameurl = request.POST['r_desc']
             rule.iscontent = True
         if request.POST.getlist('r_is')==[u'1']:
             rule.allow = True
@@ -45,11 +47,13 @@ def addReglas(request):
     contenidos = Content.objects.all()
     if request.method == 'POST':
         rule = Rule()
-        if request.POST['r_name'] == "":
+        if request.POST['r_w']:
+            print request.POST['r_name']
             rule.nameurl = request.POST['r_name']
             rule.iscontent = False
         else:
-            rule.nameurl = request.POST['r_cont']
+            print request.POST['r_desc']
+            rule.nameurl = request.POST['r_desc']
             rule.iscontent = True
         if request.POST.getlist('r_is')==[u'1']:
             rule.allow = True
