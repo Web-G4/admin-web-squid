@@ -7,96 +7,45 @@ Reglas
 Reglas
 {% endblock %}
 {% block content %}
-<div class="section">
-    <div class="container">
-        <div class="col s12 m12 l12">
-            <div class="row">
-                <div class="col s12">
-                    <ul class="tabs">
-                        {% for priv in privileges %}
-                        <li class="tab col s3"><a class="active" href="#test2">{{priv.nameprivilege}}</a></li>
-                        {% endfor %}
+<div class="container">
+    <table class="highlight">
+        <thead>
+            <tr>
+                <th data-field="r_nombre">Nombre</th>
+                <th data-field="r_descripcion">Descripción</th>
+                <th data-field="r_allow">Allow?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for regla in reglas %}
+            <tr class="parent">
+                <td>{{regla.nameurl}}</td>
+                <td>{{regla.description}}</td>
+                {% if regla.allow %}
+                <td><input type="checkbox" disabled checked id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
+                {% else %}
+                <td><input type="checkbox" disabled id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
+                {% endif %}
+                <td>
+                    <ul class="right hidden">
+                        <li class="inline"><i class="fa fa-trash" href="{% url 'webPage:addReglas' regla.idrule %}"></i></li>
+                        <li class="inline"><i class="fa fa-pencil" href="{{regla.idrule}}"></i></li>
+                        <li class="inline"><i class="fa fa-power-off" href="{{regla.idrule}}"></i></li>
                     </ul>
-                </div>
-                <div id="test1" class="col s12"><table>
-                    <thead>
-                        <tr>
-                            <th data-field="id">Name</th>
-                            <th data-field="name">Description</th>
-                            <th data-field="price"></th>
-                            <th data-field="price"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>CACA</td>
-                            <td>PIS</td>
-                            <td><input type="checkbox" id="usuario1"/><label for="usuario1"></label></td>
-                            <td><div class="fixed-action-btn vertical">
-                                <a class="btn-floating btn-large red">
-                                    <i class="fa fa-edit" id="trash1"></i>
-                                </a>
-                                <ul>
-                                    <li><a class="btn-floating red"><i class="fa fa-trash" id="trash1"></i></a></li>
-                                    <li><a class="btn-floating yellow darken-1"><i class="fa fa-pencil" id="edit1"></i></a></li>
-                                    <li><a class="btn-floating green"><i class="fa fa-power-off" id="power-off1"></i></a></li>
-
-                                </ul>
-                                </div></td>
-                        </tr>
-
-                    </tbody>
-                    </table></div>
-                <div id="test2" class="col s12">
-                    <table class="highlight">
-                        <thead>
-                            <tr>
-                                <th data-field="id">Name</th>
-                                <th data-field="name">Description</th>
-                                <th data-field="price"></th>
-                                <th data-field="price"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {% for regla in reglas %}
-                            <tr class="parent">
-                                <td>{{regla.nameurl}}</td>
-                                <td>{{regla.description}}</td>
-                                <td><input type="checkbox" id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
-                                <td>
-                                    <ul class="right hidden">
-                                        <li class="inline"><i class="fa fa-trash" id="trash1-{{regla.idrule}}"></i></li>
-                                        <li class="inline"><i class="fa fa-pencil" id="edit1-{{regla.idrule}}"></i></li>
-                                        <li class="inline"><i class="fa fa-power-off" id="power-off1-{{regla.idrule}}"></i></li>
-                                    </ul>
-                                    <!-- <div class="fixed-action-btn horizontal">
-<a class="btn-floating btn-large">
-<i class="fa fa-edit" id="trash1-{{regla.idrule}}"></i>
-</a>
-<ul>
-<li><a class="btn-floating red"><i class="fa fa-trash" id="trash1-{{regla.idrule}}"></i></a></li>
-<li><a class="btn-floating yellow darken-1"><i class="fa fa-pencil" id="edit1-{{regla.idrule}}"></i></a></li>
-<li><a class="btn-floating green"><i class="fa fa-power-off" id="power-off1-{{regla.idrule}}"></i></a></li>
-
-</ul>
-</div>-->
-                                </td>
-                            </tr>
-                            {% endfor %}
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+
 
 
 {% endblock %}
 {% block scripts %}
+<script>
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+</script>
 {% endblock %}
