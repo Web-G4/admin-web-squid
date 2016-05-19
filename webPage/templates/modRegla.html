@@ -11,13 +11,14 @@ Modificar Regla {{regla.idrule}}
     <div class="row">
         <form  action="{% url 'webPage:addReglas' %}" method="POST" enctype="multipart/form-data"  class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
             {% csrf_token %}
+            <input type="text" hidden value="{% if regla.iscontent %}0{% else %}1{% endif %}" id="w" name="r_w">
             <div class="droptrigger input-field col s8" id="url">
-                <input id="r_name" type="text" class="validate formy" name="r_name" value="{% if not regla.iscontent %} regla.namerule {% endif %}">
+                <input id="r_name" type="text" class="validate formy" name="r_name" value="{% if not regla.iscontent %} {{regla.nameurl}} {% endif %}">
                 <label for="r_name">URL</label>
             </div>
             <div id="contenido" class="input-field col s8" style="display: none">
                 <select name="r_cont">
-                    <option value="" disabled>Seleccione un Contenido</option>
+                    <option value="hola" disabled>Seleccione un Contenido</option>
                     {% for contenido in contenidos %}
                     {% if regla.iscontent %}
                     <option value="{{contenido.namecontent}}" selected>{{contenido.namecontent}}</option>
@@ -47,12 +48,12 @@ Modificar Regla {{regla.idrule}}
                 <textarea id="r_desc" class="materialize-textarea formy" name="r_desc" value="{{regla.description}}"></textarea>
                 <label for="r_desc">Descripción</label>
                 <div class="input-field col s6">
-                    <input id="r_s_h" type="text" class="validate formy" name="r_s_h" value="{{regla.rfrom}}">
-                    <label for="r_s_h">Hasta DD MM AAAA HH:MM</label>
+                    <input id="r_s_h" type="text" class="validate formy" name="r_s_h" value='{{regla.rfrom|date:"Y m d H:i"}}'>
+                    <label for="r_s_h">Hasta AAAA MM DD HH:MM</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="r_f_h" type="text" class="validate formy" name="r_f_h" value="{{regla.rto}}">
-                    <label for="r_f_h">Desde DD MM AAAA HH:MM</label>
+                    <input id="r_f_h" type="text" class="validate formy" name="r_f_h" value='{{regla.rto|date:"Y m d H:i"}}'>
+                    <label for="r_f_h">Desde AAAA MM DD HH:MM</label>
                 </div>
                 <div class="right">
                     <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
@@ -91,6 +92,13 @@ Modificar Regla {{regla.idrule}}
         $('#contenido').toggle();
         $('#go_group').toggle();
         $('#go_url').toggle();
+        if($('#w').val()=="1"){
+            $('#w').val(0);
+            console.log($('#w').val());
+        }else{
+            $('#w').val(1)
+            console.log($('#w').val());
+        }
     }
 </script>
 {% endblock %}
