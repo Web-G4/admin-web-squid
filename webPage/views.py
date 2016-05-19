@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
-from webPage.models import Rule, Rulelist, Privilege, Surfer
+from webPage.models import Rule, Rulelist, Privilege, Surfer, Content
+from datetime import datetime
 
 def listReglas(request):
     context = RequestContext(request)
@@ -12,7 +13,24 @@ def listReglas(request):
 
 def addReglas(request):
     context = RequestContext(request)
-    return render_to_response('addReglas.html',context)
+    contenidos = Content.objects.all()
+    if request.method == 'POST':
+        rule = Rule()
+        if request.POST['r_name'] == "":
+            rule.nameurl = request.POST['r_name']
+            rule.iscontent = False
+        else:
+            #rule.nameurl = request.POST['r_cont']
+            rule.iscontent = True
+        if request.POST.getlist('r_is')==[u'1']:
+            rule.allow = True
+        else:
+            rule.allow = False
+        rule.description = request.POST['r_desc']
+        rule.rfrom =  datetime.strptime(request.POST['r_s_h'], '%d %m %Y %H:%M')
+        rule.rto = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
+        rule.save()
+    return render_to_response('addReglas.html',{'contenidos':contenidos},context)
 
 def addUsuario(request):
     context = RequestContext(request)
@@ -23,7 +41,6 @@ def addUsuario(request):
         sur.pass_field = request.POST['u_pass']
         sur.nameprivilege = Privilege.objects.get(nameprivilege=request.POST['u_priv'])
         sur.save()
-
     return render_to_response('addUsuario.html',{'privilegios':privileges},context)
 
 def listUsuarios(request):

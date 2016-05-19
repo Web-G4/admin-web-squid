@@ -9,17 +9,18 @@ Añadir Reglas
 {% block content %}
 <div class="container">
     <div class="row">
-        <form class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+        <form  action="{% url 'webPage:addReglas' %}" method="POST" enctype="multipart/form-data"  class="card col s12 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+            {% csrf_token %}
             <div class="droptrigger input-field col s8" id="url">
-                <input id="rule_name" type="text" class="validate formy">
-                <label for="rule_name">URL</label>
+                <input id="r_name" type="text" class="validate formy" name="r_name">
+                <label for="r_name">URL</label>
             </div>
             <div id="contenido" class="input-field col s8" style="display: none">
-                <select>
-                    <option value="" disabled selected>Seleccione un Grupo</option>
-                    <option value="1">Paginas de Juegos</option>
-                    <option value="2">Paginas de Adultos</option>
-                    <option value="3">Videos de Youtube</option>
+                <select name="r_cont">
+                    <option value="" disabled selected>Seleccione un Contenido</option>
+                    {% for contenido in contenidos %}
+                    <option value="{{contenido.namecontent}}">{{contenido.namecontent}}</option>
+                    {% endfor %}
                 </select>
                 <label>Contenido</label>
             </div>
@@ -30,24 +31,24 @@ Añadir Reglas
             <div class="valign-wrapper switch col s3" style="padding-top:30px;padding-left:35px">
                 <label class="valign">
                     Habilitar?
-                    <input type="checkbox" id="check">
+                    <input type="checkbox" id="check" name="r_is" value="1">
                     <span class="lever"></span>
                 </label>
             </div>
             <div class="input-field col s12">
-                <textarea id="rule_desc" class="materialize-textarea formy"></textarea>
-                <label for="rule_desc">Descripción</label>
+                <textarea id="r_desc" class="materialize-textarea formy" name="r_desc"></textarea>
+                <label for="r_desc">Descripción</label>
                 <div class="input-field col s6">
-                    <input id="rule_start_hour" type="text" class="validate formy">
-                    <label for="rule_start_hour">Hasta</label>
+                    <input id="r_s_h" type="text" class="validate formy" name="r_s_h">
+                    <label for="r_s_h">Hasta DD MM AAAA HH:MM</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="rule_finish_hour" type="text" class="validate formy">
-                    <label for="rule_finish_hour">Desde</label>
+                    <input id="r_f_h" type="text" class="validate formy" name="r_f_h">
+                    <label for="r_f_h">Desde DD MM AAAA HH:MM</label>
                 </div>
                 <div class="right">
                     <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
-                    <a class="waves-effect waves-light btn light-green accent-4">Aceptar</a>
+                    <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Aceptar</button>
                 </div>
             </div>
         </form>
