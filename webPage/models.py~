@@ -14,8 +14,6 @@ class Rule(models.Model):
 
     class Meta:
         managed = True
-        verbose_name = 'Regla'
-        verbose_name_plural = 'Reglas'
         db_table = 'Rule'
 
     def __str__(self):
@@ -28,8 +26,6 @@ class Privilege(models.Model):
         
     class Meta:
         managed = True
-        verbose_name = 'Privilegio'
-        verbose_name_plural = 'Privilegios'
         db_table = 'Privilege'
         
     def __str__(self):
@@ -42,8 +38,6 @@ class Surfer(models.Model):
         
     class Meta:
         managed = True
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
         db_table = 'Surfer'
         
     def __str__(self):
@@ -56,8 +50,6 @@ class ActiveUser(models.Model):
         
     class Meta:
         managed = True
-        verbose_name = 'Usuario Activo'
-        verbose_name_plural = 'Usuarios Activos'
         db_table = 'ActiveUser'
         
     def __str__(self):
@@ -65,13 +57,11 @@ class ActiveUser(models.Model):
 
     
 class Content(models.Model):
-    nameContent = models.CharField(db_column=u'Nombre del contenido', primary_key=True, max_length=128)
+    nameContent = models.CharField(db_column=u'Nombre del contenido', primary_key=True, max_length=15)
     urlList = models.TextField(db_column=u'Lista de urls')
         
     class Meta:
         managed = True
-        verbose_name = 'Contenido'
-        verbose_name_plural = 'Contenidos'
         db_table = 'Content'
 
     def __str__(self):
