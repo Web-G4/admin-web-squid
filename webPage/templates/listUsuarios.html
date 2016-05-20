@@ -18,10 +18,10 @@ Lista de Usuarios
     </thead>
 
     <tbody>
-        {% for usuario in usuarios %}
+        {% for i in surfs %}
         <tr>
-            <td>{{usuario.username}}</td>
-            <td>{{usuario.nameprivilege.nameprivilege}}</td>
+            <td>{{i.username}}</td>
+            <td>{{i.namePrivilege}}</td>
         </tr>
         {% endfor %}
     </tbody>

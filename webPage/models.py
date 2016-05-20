@@ -13,8 +13,8 @@ class Rule(models.Model):
     rTo = models.DateTimeField(db_column=u'Hasta')
 
     class Meta:
-        managed = False
-        db_table = 'Reglas'
+        managed = True
+        db_table = 'Rule'
 
     def __str__(self):
         return self.nameURL
@@ -25,8 +25,8 @@ class Privilege(models.Model):
     appliedRules = models.ManyToManyField(Rule, db_column=u'Reglas aplicadas')
         
     class Meta:
-        managed = False
-        db_table = 'Privilegios'
+        managed = True
+        db_table = 'Privilege'
         
     def __str__(self):
         return self.namePrivilege
@@ -37,8 +37,8 @@ class Surfer(models.Model):
     namePrivilege = models.ForeignKey(Privilege, db_column=u'Privilegio')
         
     class Meta:
-        managed = False
-        db_table = 'Usuario'
+        managed = True
+        db_table = 'Surfer'
         
     def __str__(self):
         return self.username
@@ -49,8 +49,8 @@ class ActiveUser(models.Model):
     nameSurfer = models.ForeignKey(Surfer, db_column=u'Usuario')
         
     class Meta:
-        managed = False
-        db_table = 'Usuarios Activos'
+        managed = True
+        db_table = 'ActiveUser'
         
     def __str__(self):
         return self.ipSurfer
@@ -61,8 +61,8 @@ class Content(models.Model):
     urlList = models.TextField(db_column=u'Lista de urls')
         
     class Meta:
-        managed = False
-        db_table = 'Contenido'
+        managed = True
+        db_table = 'Content'
 
     def __str__(self):
         return self.nameContent

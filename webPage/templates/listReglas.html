@@ -19,17 +19,17 @@ Reglas
         <tbody>
             {% for regla in reglas %}
             <tr class="parent">
-                <td>{{regla.nameurl}}</td>
+                <td>{{regla.nameURL}}</td>
                 <td>{{regla.description}}</td>
                 {% if regla.allow %}
-                <td><input type="checkbox" disabled checked id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
+                <td><input type="checkbox" disabled checked id="check-{{regla.idRule}}"/><label for="check-{{regla.idRule}}"></label></td>
                 {% else %}
-                <td><input type="checkbox" disabled id="check-{{regla.idrule}}"/><label for="check-{{regla.idrule}}"></label></td>
+                <td><input type="checkbox" disabled id="check-{{regla.idRule}}"/><label for="check-{{regla.idRule}}"></label></td>
                 {% endif %}
                 <td>
                     <ul class="right hidden">
-                        <li class="inline"><a href="{% url 'webPage:delRegla' regla.idrule %}"><i class="fa fa-trash"></i></a></li>
-                        <li class="inline"><a href="{% url 'webPage:modRegla' regla.idrule %}"><i class="fa fa-pencil"></i></a></li>
+                        <li class="inline"><a href="{% url 'webPage:delRegla' regla.idRule %}"><i class="fa fa-trash"></i></a></li>
+                        <li class="inline"><a href="{% url 'webPage:modRegla' regla.idRule %}"><i class="fa fa-pencil"></i></a></li>
                     </ul>
                 </td>
             </tr>
