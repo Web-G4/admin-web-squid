@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Activeuser, Content, Privilege, Rule, Rulelist, Surfer
+from .models import ActiveUser, Content, Privilege, Rule, Surfer
 # Register your models here.
-admin.site.register(Activeuser)
+admin.site.register(ActiveUser)
 admin.site.register(Content)
 admin.site.register(Privilege)
 admin.site.register(Rule)
-admin.site.register(Rulelist)
 admin.site.register(Surfer)

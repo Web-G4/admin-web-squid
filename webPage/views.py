@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
-from webPage.models import Rule, Rulelist, Privilege, Surfer, Content
+from webPage.models import Rule, Privilege, Surfer, Content
 from datetime import datetime
 
 def listReglas(request):
