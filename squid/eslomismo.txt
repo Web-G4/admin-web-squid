@@ -1,0 +1,11 @@
+
+
+Modificar ip del html de error de squid para que muestre las imagenes
+
+Cargar la base de Datos con el archivo chargeDB.sql
+
+Probar los scripts pyton
+
+Si todo esto anda empezar con iptables
+
+

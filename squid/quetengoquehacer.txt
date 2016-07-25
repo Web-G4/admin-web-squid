@@ -1,0 +1,4 @@
+configurar pagina 403
+* Definir ip final del server para la pagina 403
+cargar base de datos mysql
+cargar django

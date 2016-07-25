@@ -1,0 +1,5 @@
+sudo apt install mysql-server
+sudo mysql -u root -o < SeaWall.sql
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+sudo nano /etc/mysql/my.cnf
+comentar linea bind-address

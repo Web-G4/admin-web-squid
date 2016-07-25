@@ -1,0 +1,6 @@
+El bloqueo por contenido en sí es un listado de palabras claves o dominios específicos divididos en ciertas categorias. Estas carpetas con los dominios vienen ya armadas con un gran registro de paginas.
+
+Comandos necesarios:
+
+acl block_(nombre de la categoria) url_regex -i "/etc/squid3/categorias/(nombre de la categoria a bloquear)/domains"
+http_access deny block_(nombre de la categoria)

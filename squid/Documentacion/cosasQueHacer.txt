@@ -1,0 +1,15 @@
+- Actualizar clocking
+- informe del trabajo (documentar)
+
+- - Conceptos generales
+- - Herramientas (documentacion basica)
+- - Panificacion (clocking pasado a pdf)
+- - Tipos de filtro
+
+- Exposicion
+
+- - Como funciona un Proxy
+- - Herramientas utilizadas
+- - Como configurar
+- - Testing
+

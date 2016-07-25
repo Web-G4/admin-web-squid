@@ -1,0 +1,58 @@
+
+#MAURO PARIS
+
+#EL SIGUIENTE CODIGO HARA QUE DESDE LAS 14:30HS HASTA LAS 22:55
+#SE PODRA UTILIZAR LA PAGINA .kat.cr Y FUERA DE ESTE HORARIO
+#LA PAGINA ESTARA BLOQUEADA
+
+acl SSL_ports port 443
+acl Safe_ports port 80          # http
+acl Safe_ports port 21          # ftp
+acl Safe_ports port 443         # https
+acl Safe_ports port 70          # gopher
+acl Safe_ports port 210         # wais
+acl Safe_ports port 1025-65535  # unregistered ports
+acl Safe_ports port 280         # http-mgmt
+acl Safe_ports port 488         # gss-http
+acl Safe_ports port 591         # filemaker
+acl Safe_ports port 777         # multiling http
+acl CONNECT method CONNECT
+
+
+#acl operario src "/etc/squid3/privilegios/operario"#Operario lo sacas de name de privilegio
+#acl rulePornoOperario src "/etc/squid3/contenido/porno"#porno lo sacas de name content. operario de privilegio
+#Contenido es un archivo link por link o url regex bloqueado o permitido
+#acl timeRulePornoOperario time M T W H F 08:00-17:00
+#HACER QUE EL 403 TENGA LA DESCRIPCION DE LA REGLA#lo sacas de descripcion regla
+#http_access deny timeRulePornoOPerario rulePornoOperario
+#http_access allow rulePornoOperario 
+#http_access deny all
+
+#OPERARIO
+acl operIp src "/etc/squid3/priv/operador"
+acl operTime time "/etc/squid3/priv/operTime"
+acl operForbid url_regex -i "/etc/squid3/priv/operForbid"
+http_access deny operIp operForbid
+http_access allow all
+
+
+#acl paginatime time M T W H F 17:30-22:55
+#acl pagina dstdomain .kat.cr
+#http_access allow paginatime pagina
+#http_access deny pagina
+
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+#INSERT RULES HERE
+http_access allow localhost manager
+http_access deny manager
+http_access allow localhost
+http_access deny all
+http_port 3128
+
+coredump_dir /var/spool/squid3
+
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320 

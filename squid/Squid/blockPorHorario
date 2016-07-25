@@ -1,0 +1,20 @@
+#MAURO PARIS
+
+#EL SIGUIENTE CODIGO HARA QUE DESDE LAS 14:30HS HASTA LAS 22:55
+#SE PODRA UTILIZAR LA PAGINA .kat.cr Y FUERA DE ESTE HORARIO
+#LA PAGINA ESTARA BLOQUEADA
+# "paginatime" ES UNA VARIABLE QUE CONTIENE LOS DIAS ( M T W H F )* 
+#Y EL HORARIO (14:30-22:55). ESTO SE ESPECIFICA CON LA PALABRA CLAVE "time"
+#"pagina" ES UNA VARIABLE QUE CONTIENE UN LINK. SABEMOS ESTO POR LA PALABRA
+#CLAVE "dstdomain".
+#"http_access allow paginatime pagina" PERMITE EL CONTENIDO EN LA VARIABLE
+#"pagina" POR EL PERIODO DE TIEMPO DE LA VARIABLE "paginatime"
+#BLOCKEAR EL CONTENIDO DE "pagina" POR EL RESTO DEL TIEMPO.
+
+acl paginatime time M T W H F 14:30-22:55
+acl pagina dstdomain .kat.cr
+http_access allow paginatime pagina
+http_access deny pagina
+
+#* M T W H F = Monday, Tuesday, Wednesday, tHursday, Friday
+

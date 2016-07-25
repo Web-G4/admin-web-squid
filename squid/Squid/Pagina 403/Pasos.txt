@@ -1,0 +1,7 @@
+
+
+Pegar las dos imagenes en /usr/share/squid3/icons/
+Pegar mime.conf en /usr/share/squid3/
+Pegar ERR_ACCESS_DENIED en /usr/share/squid-langpack/en/
+
+

@@ -1,0 +1,94 @@
+
+### HEADER SECTION ###
+
+
+acl SSL_ports port 443
+acl Safe_ports port 80		# http
+acl Safe_ports port 21		# ftp
+acl Safe_ports port 443		# https
+acl Safe_ports port 70		# gopher
+acl Safe_ports port 210		# wais
+acl Safe_ports port 1025-65535	# unregistered ports
+acl Safe_ports port 280		# http-mgmt
+acl Safe_ports port 488		# gss-http
+acl Safe_ports port 591		# filemaker
+acl Safe_ports port 777		# multiling http
+acl CONNECT method CONNECT
+
+
+
+
+### ACL SECTION ###
+
+
+
+#ACL - Administrador
+acl AdministradorIp src "/home/pi/ftp/Script/users/Administrador"
+
+
+#ACL - Invitado
+acl InvitadoIp src "/home/pi/ftp/Script/users/Invitado"
+
+
+#ACL - OperarioMantenimient
+acl OperarioMantenimientIp src "/home/pi/ftp/Script/users/OperarioMantenimient"
+
+acl OperarioMantenimientRule1Time time MTWHF 08:00-18:00
+acl OperarioMantenimientRule1NameURL url_regex -i "/home/pi/ftp/Script/content/media"
+
+
+#ACL - OperarioPrensa
+acl OperarioPrensaIp src "/home/pi/ftp/Script/users/OperarioPrensa"
+
+acl OperarioPrensaRule1Time time MTWHF 14:20-15:20
+acl OperarioPrensaRule1NameURL url_regex -i "/home/pi/ftp/Script/content/games"
+
+acl OperarioPrensaRule2Time time MTWHF 13:20-14:20
+acl OperarioPrensaRule2NameURL dstdomain facebook.com
+
+acl OperarioPrensaRule3Time time MTWHF 08:00-18:00
+acl OperarioPrensaRule3NameURL url_regex -i "/home/pi/ftp/Script/content/media"
+
+
+
+
+### ACCESS SECTION ###
+
+
+
+#ACCESS - Administrador
+http_access allow all AdministradorIp
+
+#ACCESS - Invitado
+http_access deny all InvitadoIp
+
+#ACCESS - OperarioMantenimient
+http_access allow OperarioMantenimientRule1Time OperarioMantenimientRule1NameURL OperarioMantenimientIp
+http_access deny all OperarioMantenimientIp
+
+#ACCESS - OperarioPrensa
+http_access deny OperarioPrensaRule1Time OperarioPrensaRule1NameURL OperarioPrensaIp
+http_access deny OperarioPrensaRule2Time OperarioPrensaRule2NameURL OperarioPrensaIp
+http_access allow OperarioPrensaRule3Time OperarioPrensaRule3NameURL OperarioPrensaIp
+http_access allow all OperarioPrensaIp
+
+
+
+
+### FOOTER SECTION ###
+
+
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access allow localhost manager
+http_access deny manager
+http_access allow localhost
+http_access deny all
+http_port 3128
+
+coredump_dir /var/spool/squid3
+
+refresh_pattern ^ftp:		1440	20%	10080
+refresh_pattern ^gopher:	1440	0%	1440
+refresh_pattern -i (/cgi-bin/|\?) 0	0%	0
+refresh_pattern .		0	20%	4320

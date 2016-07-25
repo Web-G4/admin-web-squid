@@ -1,0 +1,9 @@
+#acl operario src "/etc/squid3/privilegios/operario"#Operario lo sacas de name de privilegio
+#acl rulePornoOperario src "/etc/squid3/contenido/porno"#porno lo sacas de name content. operario de privilegio
+#Contenido es un archivo link por link o url regex bloqueado o permitido
+#acl timeRulePornoOperario time M T W H F 08:00-17:00
+#HACER QUE EL 403 TENGA LA DESCRIPCION DE LA REGLA#lo sacas de descripcion regla
+#http_access deny timeRulePornoOPerario rulePornoOperario
+#http_access allow rulePornoOperario
+#http_access deny all
+

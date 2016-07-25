@@ -1,0 +1,17 @@
+[Haciendo bossio]Lista de contenidos de internet
+Ip tables
+Presentacion de Integracion
+Archivo sh
+        Instalar squid
+        configurarpagina de restriccion
+        iptables
+        instalar mysql
+        configurar acceso a mysql externo
+        cargar base de datos
+        crear carpetas seawall - users - content
+        alojar los archivos python en $HOME/SeaWall/Script/
+
+  Agregar filtrado por servicio FTP, ssh, (por puerto o por protocolo decidir)
+  Cache
+  Https
+  QoS

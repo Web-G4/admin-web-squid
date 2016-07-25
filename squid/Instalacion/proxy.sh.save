@@ -1,0 +1,35 @@
+echo "=====================INSERTE CONTRASEÑA===================="
+sudo su
+
+echo "=====================INSTALANDO SQUID======================"
+apt-get install squid3
+
+cd 
+echo "=====================CONFIGURANDO PAGINA 403==============="
+cp Candado.png home.png /usr/share/squid3/icons/
+echo "IMAGENES [HECHO]"
+cp mime.conf /usr/share/squid3/
+echo "MIME.CONF [HECHO]"
+cp ERR_ACCESS_DENIED /usr/share/squid-langpack/en/
+echo "ACCESS_DENIED [HECHO]"
+echo "###########################################################"
+
+echo "======================CONFIGURANDO IPTABLES================"
+#TO DO: CONFIGURAR IPTABLES#
+
+echo "======================INSTALANDO MYSQL====================="
+sudo apt-get install mysql-server
+
+echo "==================CARGANO BASE DE DATOS===================="
+sudo mysql -u root -o < SeaWall.sql
+
+echo "===============CONFIGURANDO BASE DE DATOS=================="
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+#TO DO: COORDINAR PASSWORDS#
+
+echo "===================CONFIGURANDO MYSQL======================"
+sudo nano /etc/mysql/my.cnf
+
+
+
+

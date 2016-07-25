@@ -1,78 +1,71 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
 from django.db import models
 
 
-class Rule(models.Model):
-    nameURL = models.CharField(db_column=u'Nombre de la URL', max_length=128, blank=True)
-    idRule = models.AutoField(db_column=u'ID de la Regla', primary_key=True)
-    isContent = models.BooleanField(db_column=u'Is content', blank=True)
-    description = models.TextField(db_column=u'Descripcion de la Regla')
-    allow = models.BooleanField(db_column=u'Permitido', blank=True)
-    rFrom = models.DateTimeField(db_column=u'Desde')
-    rTo = models.DateTimeField(db_column=u'Hasta')
-
-    class Meta:
-        managed = True
-        verbose_name = 'Regla'
-        verbose_name_plural = 'Reglas'
-        db_table = 'Rule'
-
-    def __str__(self):
-        return self.nameURL
-
-class Privilege(models.Model):
-    namePrivilege = models.CharField(db_column=u'Nombre del Privilegio', primary_key=True, max_length=128)
-    isBlock = models.BooleanField(db_column=u'Bloqueado', blank=True)
-    appliedRules = models.ManyToManyField(Rule, db_column=u'Reglas aplicadas')
-        
-    class Meta:
-        managed = True
-        verbose_name = 'Privilegio'
-        verbose_name_plural = 'Privilegios'
-        db_table = 'Privilege'
-        
-    def __str__(self):
-        return self.namePrivilege
-
-class Surfer(models.Model):
-    username = models.CharField(db_column=u'Nombre de Usuario', primary_key=True, max_length=128)
-    passField = models.CharField(db_column=u'Contrasena', max_length=128)
-    namePrivilege = models.ForeignKey(Privilege, db_column=u'Privilegio')
-        
-    class Meta:
-        managed = True
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
-        db_table = 'Surfer'
-        
-    def __str__(self):
-        return self.username
-
 class ActiveUser(models.Model):
-    idActiveUser = models.AutoField(db_column=u'ID del usuario', primary_key=True)
-    ipSurfer = models.CharField(db_column=u'IP del usuario activo', blank=True, max_length=15)
-    nameSurfer = models.ForeignKey(Surfer, db_column=u'Usuario')
-        
-    class Meta:
-        managed = True
-        verbose_name = 'Usuario Activo'
-        verbose_name_plural = 'Usuarios Activos'
-        db_table = 'ActiveUser'
-        
-    def __str__(self):
-        return self.ipSurfer
+    idactiveuser = models.AutoField(db_column='idActiveUser', primary_key=True)  # Field name made lowercase.
+    ipsurfer = models.CharField(db_column='ipSurfer', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    namesurfer = models.ForeignKey('Surfer', models.DO_NOTHING, db_column='nameSurfer', blank=True, null=True)  # Field name made lowercase.
 
-    
-class Content(models.Model):
-    nameContent = models.CharField(db_column=u'Nombre del contenido', primary_key=True, max_length=128)
-    urlList = models.TextField(db_column=u'Lista de urls')
-        
     class Meta:
-        managed = True
-        verbose_name = 'Contenido'
-        verbose_name_plural = 'Contenidos'
+        managed = False
+        db_table = 'ActiveUser'
+
+
+class Content(models.Model):
+    namecontent = models.CharField(db_column='nameContent', primary_key=True, max_length=128)  # Field name made lowercase.
+    urllist = models.TextField(db_column='urlList', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
         db_table = 'Content'
 
-    def __str__(self):
-        return self.nameContent
+
+class Privilege(models.Model):
+    nameprivilege = models.CharField(db_column='namePrivilege', primary_key=True, max_length=128)  # Field name made lowercase.
+    isblock = models.IntegerField(db_column='isBlock', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Privilege'
+
+
+class Rule(models.Model):
+    nameurl = models.CharField(db_column='nameURL', max_length=128, blank=True, null=True)  # Field name made lowercase.
+    idrule = models.AutoField(db_column='idRule', primary_key=True)  # Field name made lowercase.
+    iscontent = models.IntegerField(db_column='isContent', blank=True, null=True)  # Field name made lowercase.
+    description = models.TextField(blank=True, null=True)
+    allow = models.IntegerField(blank=True, null=True)
+    rfrom = models.TimeField(db_column='rFrom', blank=True, null=True)  # Field name made lowercase.
+    rto = models.TimeField(db_column='rTo', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Rule'
+
+
+class RuleList(models.Model):
+    privilegeasigned = models.ForeignKey(Privilege, models.DO_NOTHING, db_column='privilegeAsigned', blank=True, null=True)  # Field name made lowercase.
+    ruleasigned = models.ForeignKey(Rule, models.DO_NOTHING, db_column='ruleAsigned', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'RuleList'
+
+
+class Surfer(models.Model):
+    username = models.CharField(primary_key=True, max_length=128)
+    pass_field = models.CharField(db_column='pass', max_length=128, blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    nameprivilege = models.ForeignKey(Privilege, models.DO_NOTHING, db_column='namePrivilege')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Surfer'
