@@ -47,6 +47,15 @@ Añadir Reglas
                     <input id="r_f_h" type="text" class="validate formy" name="r_f_h">
                     <label for="r_f_h">Hasta DD MM AAAA HH:MM</label>
                 </div>
+                <div id="privilegios" class="input-field col s12">
+                    <select name="r_priv">
+                        <option value="hola" disabled selected>Seleccione un Privilegio</option>
+                        {% for privilegio in privilegios %}
+                        <option value="{{privilegio.namePrivilege}}">{{privilegio.namePrivilege}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Privilegio</label>
+                </div>
                 <div class="right">
                     <a id="cancel" class="waves-effect waves-light btn red accent-3">Cancelar</a>
                     <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Aceptar</button>

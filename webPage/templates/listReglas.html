@@ -13,6 +13,7 @@ Reglas
             <tr>
                 <th data-field="r_nombre">Nombre</th>
                 <th data-field="r_descripcion">Descripción</th>
+                <th data-field="r_priv">Privilegio</th>
                 <th data-field="r_allow">Allow?</th>
             </tr>
         </thead>
@@ -21,6 +22,13 @@ Reglas
             <tr class="parent">
                 <td>{{regla.nameURL}}</td>
                 <td>{{regla.description}}</td>
+                <td>
+                  {% for l in lista %}
+                  {% if regla == l.ruleAsigned %}
+                  {{l.privilegeAsigned}}
+                  {% endif %}
+                  {% endfor %}
+                </td>
                 {% if regla.allow %}
                 <td><input type="checkbox" disabled checked id="check-{{regla.idRule}}"/><label for="check-{{regla.idRule}}"></label></td>
                 {% else %}

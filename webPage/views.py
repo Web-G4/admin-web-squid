@@ -1,15 +1,40 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
-from webPage.models import Rule, Privilege, Surfer, Content
+from webPage.models import Rule, Privilege, Surfer, Content, RuleList, ActiveUser
 from datetime import datetime
+from django.http import HttpRequest
+
+def activatingUser(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        client_address = get_client_ip(request)
+        try:
+            surfer = Surfer.objects.get(username = request.POST['username'], passField = request.POST['password'])
+            activated = ActiveUser()
+            activated.nameSurfer = surfer
+            activated.ipSurfer = client_address
+            activated.save()
+        except Surfer.DoesNotExist:
+            print "No existe el usuario"
+        except Surfer.MultipleObjectsReturned:
+            print "Muchos usuarios!!!"
+    return render_to_response('activation.html',context)
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def listReglas(request):
     context = RequestContext(request)
     reglas = Rule.objects.all()
-    privileges = Privilege.objects.all()
+    lista = RuleList.objects.all()
     #lista = RuleList.getObject(id=idLista)
     #reglas = lista.ruleasigned
-    return render_to_response('listReglas.html',{'reglas':reglas, 'privileges':privileges},context)
+    return render_to_response('listReglas.html',{'reglas':reglas,'lista':lista},context)
 
 def delRegla(request, rId):
     context = RequestContext(request)
@@ -45,6 +70,7 @@ def modRegla(request, rId):
 def addReglas(request):
     context = RequestContext(request)
     contenidos = Content.objects.all()
+    privileges = Privilege.objects.all()
     if request.method == 'POST':
         rule = Rule()
         if request.POST['r_w']:
@@ -63,7 +89,13 @@ def addReglas(request):
         rule.rFrom =  datetime.strptime(request.POST['r_s_h'], '%d %m %Y %H:%M')
         rule.rTo = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
         rule.save()
-    return render_to_response('addReglas.html',{'contenidos':contenidos},context)
+        lista = RuleList()
+        priv = Privilege.objects.get(namePrivilege = request.POST['r_priv'])
+        rule = Rule.objects.last()
+        lista.privilegeAsigned = priv
+        lista.ruleAsigned = rule
+        lista.save()
+    return render_to_response('addReglas.html',{'contenidos':contenidos,'privilegios':privileges},context)
 
 def addUsuario(request):
     context = RequestContext(request)
@@ -93,5 +125,3 @@ def listPrivilegios(request):
             priv.isBlock = False
         priv.save()
     return render_to_response('listPrivilegios.html',{'privilegios':privileges},context)
-
-
