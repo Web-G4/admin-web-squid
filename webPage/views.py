@@ -10,6 +10,7 @@ def activatingUser(request):
         client_address = get_client_ip(request)
         try:
             surfer = Surfer.objects.get(username = request.POST['username'], passField = request.POST['password'])
+            ActiveUser.objects.filter(nameSurfer = surfer).delete()
             activated = ActiveUser()
             activated.nameSurfer = surfer
             activated.ipSurfer = client_address
