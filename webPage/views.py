@@ -4,6 +4,26 @@ from webPage.models import Rule, Privilege, Surfer, Content, RuleList, ActiveUse
 from datetime import datetime
 from django.http import HttpRequest
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+def admin_log_in(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        username = request.POST['username']
+        passField = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('/listaDeUsuarios/')
+            else:
+                pass
+        else:
+            pass
+    return render_to_response('activation.html',context)
+
 def activatingUser(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -29,6 +49,7 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+@login_required(login_url='/login/')
 def listReglas(request):
     context = RequestContext(request)
     reglas = Rule.objects.all()
@@ -37,6 +58,7 @@ def listReglas(request):
     #reglas = lista.ruleasigned
     return render_to_response('listReglas.html',{'reglas':reglas,'lista':lista},context)
 
+@login_required(login_url='/login/')
 def delRegla(request, rId):
     context = RequestContext(request)
     rule = Rule.objects.get(idRule = rId)
@@ -45,6 +67,7 @@ def delRegla(request, rId):
     privileges = Privilege.objects.all()
     return render_to_response('listReglas.html',{'reglas':reglas, 'privileges':privileges},context)
 
+@login_required(login_url='/login/')
 def modRegla(request, rId):
     context = RequestContext(request)
     contenidos = Content.objects.all()
@@ -68,6 +91,7 @@ def modRegla(request, rId):
         rule.save()
     return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule},context)
 
+@login_required(login_url='/login/')
 def addReglas(request):
     context = RequestContext(request)
     contenidos = Content.objects.all()
@@ -98,6 +122,7 @@ def addReglas(request):
         lista.save()
     return render_to_response('addReglas.html',{'contenidos':contenidos,'privilegios':privileges},context)
 
+@login_required(login_url='/login/')
 def addUsuario(request):
     context = RequestContext(request)
     privileges = Privilege.objects.all()
@@ -109,11 +134,13 @@ def addUsuario(request):
         sur.save()
     return render_to_response('addUsuario.html',{'privilegios':privileges},context)
 
+@login_required(login_url='/login/')
 def listUsuarios(request):
     context = RequestContext(request)
     surfs = Surfer.objects.all()
     return render_to_response('listUsuarios.html',{'surfs':surfs},context)
 
+@login_required(login_url='/login/')
 def listPrivilegios(request):
     context = RequestContext(request)
     privileges = Privilege.objects.all()
