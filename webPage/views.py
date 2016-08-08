@@ -41,6 +41,10 @@ def activatingUser(request):
             print "Muchos usuarios!!!"
     return render_to_response('activation.html',context)
 
+def logSucceed(request):
+    context = RequestContext(request)
+    return render_to_response('navegacion.html',context)
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
