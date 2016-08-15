@@ -53,7 +53,7 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def listReglas(request):
     context = RequestContext(request)
     reglas = Rule.objects.all()
@@ -62,7 +62,7 @@ def listReglas(request):
     #reglas = lista.ruleasigned
     return render_to_response('listReglas.html',{'reglas':reglas,'lista':lista},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def delRegla(request, rId):
     context = RequestContext(request)
     rule = Rule.objects.get(idRule = rId)
@@ -71,7 +71,7 @@ def delRegla(request, rId):
     privileges = Privilege.objects.all()
     return render_to_response('listReglas.html',{'reglas':reglas, 'privileges':privileges},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def modRegla(request, rId):
     context = RequestContext(request)
     contenidos = Content.objects.all()
@@ -95,7 +95,7 @@ def modRegla(request, rId):
         rule.save()
     return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def addReglas(request):
     context = RequestContext(request)
     contenidos = Content.objects.all()
@@ -126,7 +126,7 @@ def addReglas(request):
         lista.save()
     return render_to_response('addReglas.html',{'contenidos':contenidos,'privilegios':privileges},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def addUsuario(request):
     context = RequestContext(request)
     privileges = Privilege.objects.all()
@@ -138,13 +138,13 @@ def addUsuario(request):
         sur.save()
     return render_to_response('addUsuario.html',{'privilegios':privileges},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def listUsuarios(request):
     context = RequestContext(request)
     surfs = Surfer.objects.all()
     return render_to_response('listUsuarios.html',{'surfs':surfs},context)
 
-@login_required(login_url='/login/')
+#@login_required(login_url='/login/')
 def listPrivilegios(request):
     context = RequestContext(request)
     privileges = Privilege.objects.all()

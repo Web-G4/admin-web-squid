@@ -9,6 +9,25 @@ Lista de Privilegios
 {% block content %}
 
 
+<div class="container row blue-grey lighten-5">
+    <div class="card">
+        <form  action="{% url 'webPage:listPrivilegios' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-field col s8 m6 l6">
+                <input id="p_nom" type="text" name="p_nom">
+                <label for="p_nom">Nombre del Privilegio</label>
+            </div>
+            <div class="input-field col s2">
+                <input type="checkbox" id="p_is" name="p_is" value="1"/>
+                <label for="p_is">Bloqueo</label>
+            </div>
+            <div class="input-field col s2 m3 l3">
+                <button class="btn waves-effect waves-light  light-green accent-4" type="submit" name="action">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="highlight container" >
     <thead>
         <tr>
@@ -21,28 +40,18 @@ Lista de Privilegios
         {% for privilegio in privilegios %}
         <tr>
             <td>{{privilegio.namePrivilege}}</td>
-            <td>{{privilegio.isBlock}}</td>
+            <td>
+                {% if privilegio.isBlock %}
+                <i class="fa fa-check" aria-hidden="true"></i>
+                {% else %}
+                <i class="fa fa-times" aria-hidden="true"></i>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<div class="container row">
-    <form  action="{% url 'webPage:listPrivilegios' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="input-field col s8 m6 l6">
-            <input id="p_nom" type="text" name="p_nom">
-            <label for="p_nom">Nombre del Privilegio</label>
-        </div>
-        <div class="input-field col s2">
-            <input type="checkbox" id="p_is" name="p_is" value="1"/>
-            <label for="p_is">Bloqueo</label>
-        </div>
-        <div class="input-field col s2 m3 l3">
-            <button class="btn waves-effect waves-light  light-green accent-4" type="submit" name="action">Submit          </button>
-        </div>
-    </form>
-</div>
 {% endblock %}
 
 {% block scripts %}
