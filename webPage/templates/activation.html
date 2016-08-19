@@ -8,21 +8,22 @@
   <title>Activando Usuario</title>
 </head>
 <body>
+  <header>
+  </header>
   <main>
     <div class="container">
       <div class="row">
-        <form action="{% url 'webPage:activatingUser' %}" method="POST" enctype="multipart/form-data" class="card col s8 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+        <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="card col s8 blue-grey lighten-5" style="padding:15px;margin-top:20px">
           {% csrf_token %}
-          <h4 class="col s8 offset-s2">Activando Usuario</h4>
           <div class="input-field col s8 offset-s2">
-            <input id="username" type="text" class="validate formy" name="username">
-            <label for="username">Nombre de Usuario</label>
+            <input id="u_nom" type="text" name="username">
+            <label for="u_nom">Nombre de Usuario</label>
           </div>
           <div class="input-field col s8 offset-s2">
-            <input id="password" type="password" class="validate formy" name="password">
-            <label for="password">Contraseña</label>
+            <input id="u_pass" type="password" name="password">
+            <label for="u_pass">Contraseña</label>
           </div>
-          <div class="input-field center">
+          <div class="center">
             {% if request.path != '/login/' %}
             <a id="cancel" class="waves-effect waves-light btn red accent-3" href="{% url 'webPage:login' %}">Soy Administrador</a>
             <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Activar Sesion</button>

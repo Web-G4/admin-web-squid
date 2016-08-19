@@ -13,7 +13,7 @@ def admin_log_in(request):
     if request.method == 'POST':
         username = request.POST['username']
         passField = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=passField)
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -26,24 +26,25 @@ def admin_log_in(request):
 
 def activatingUser(request):
     context = RequestContext(request)
-    if request.method == 'POST':
-        client_address = get_client_ip(request)
-        try:
-            surfer = Surfer.objects.get(username = request.POST['username'], passField = request.POST['password'])
-            ActiveUser.objects.filter(nameSurfer = surfer).delete()
-            activated = ActiveUser()
-            activated.nameSurfer = surfer
-            activated.ipSurfer = client_address
-            activated.save()
-        except Surfer.DoesNotExist:
-            print "No existe el usuario"
-        except Surfer.MultipleObjectsReturned:
-            print "Muchos usuarios!!!"
-    return render_to_response('activation.html',context)
-
-def logSucceed(request):
-    context = RequestContext(request)
-    return render_to_response('navegacion.html',context)
+    client_address = get_client_ip(request)
+    try:
+        activated = ActiveUser.objects.get(ipSurfer = client_address)
+        return render_to_response('navegacion.html',{'user': activated},context)
+    except ActiveUser.DoesNotExist:
+        if request.method == 'POST':
+            try:
+                surfer = Surfer.objects.get(username = request.POST['username'], passField = request.POST['password'])
+                ActiveUser.objects.filter(nameSurfer = surfer).delete()
+                activated = ActiveUser()
+                activated.nameSurfer = surfer
+                activated.ipSurfer = client_address
+                activated.save()
+                return render_to_response('navegacion.html',{'user': activated},context)
+            except Surfer.DoesNotExist:
+                print "No existe el usuario"
+            except Surfer.MultipleObjectsReturned:
+                print "Muchos usuarios!!!"
+        return render_to_response('activation.html',context)
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -61,6 +62,20 @@ def listReglas(request):
     #lista = RuleList.getObject(id=idLista)
     #reglas = lista.ruleasigned
     return render_to_response('listReglas.html',{'reglas':reglas,'lista':lista},context)
+
+@login_required(login_url='/login/')
+def listActiveUsers(request):
+    context = RequestContext(request)
+    users = ActiveUser.objects.all()
+    return render_to_response('listActiveUsers.html',{'users': users},context)
+
+@login_required(login_url='/login/')
+def kickUser(request, idAU):
+    context = RequestContext(request)
+    user = ActiveUser.objects.get(idActiveUser = idAU)
+    user.delete()
+    users = Rule.objects.all()
+    return render_to_response('listActiveUsers.html',{'users': users},context)
 
 @login_required(login_url='/login/')
 def delRegla(request, rId):

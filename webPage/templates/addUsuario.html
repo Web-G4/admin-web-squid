@@ -12,11 +12,11 @@ Registro
         <form action="{% url 'webPage:addUsuario' %}" method="POST" enctype="multipart/form-data" class="card col s8 offset-s2 blue-grey lighten-5" style="padding:15px;margin-top:20px">
             {% csrf_token %}
             <div class="input-field col s8 offset-s2">
-                <input id="u_nom" type="text" class="validate formy" name="u_nom">
+                <input id="u_nom" type="text" name="u_nom">
                 <label for="u_nom">Nombre de Usuario</label>
             </div>
             <div class="input-field col s8 offset-s2">
-                <input id="u_pass" type="password" class="validate formy" name="u_pass">
+                <input id="u_pass" type="password" name="u_pass">
                 <label for="u_pass">Contraseña</label>
             </div>
             <div class="input-field col s8 offset-s2">
