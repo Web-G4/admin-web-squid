@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html>
-    <head>
-        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <title>Activando Usuario</title>
-    </head>
-    <body>
-        <main>
-          <div class="container">
-              <div class="row">
-                  <form action="{% url 'webPage:activatingUser' %}" method="POST" enctype="multipart/form-data" class="card col s8 blue-grey lighten-5" style="padding:15px;margin-top:20px">
-                      {% csrf_token %}
-                      <h4 class="col s8 offset-s2">Activando Usuario</h4>
-                      <div class="input-field col s8 offset-s2">
-                          <input id="username" type="text" class="validate formy" name="username">
-                          <label for="username">Nombre de Usuario</label>
-                      </div>
-                      <div class="input-field col s8 offset-s2">
-                          <input id="password" type="password" class="validate formy" name="password">
-                          <label for="password">Contraseña</label>
-                      </div>
-                      <div class="input-field center">
-                        {% if request.path != '/login/' %}
-                        <a id="cancel" class="waves-effect waves-light btn red accent-3" href="{% url 'webPage:login' %}">Soy Administrador</a>
-                        <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Activar Sesion</button>
-                        {% else %}
-                        <a id="cancel" class="waves-effect waves-light btn red accent-3" href="{% url 'webPage:activatingUser' %}">Soy Usuario</a>
-                        <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Entrar como administrador</button
-                        {% endif %}
-                      </div>
-                  </form>
-              </div>
+<head>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}" media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <title>Activando Usuario</title>
+</head>
+<body>
+  <header>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="card col s8 blue-grey lighten-5" style="padding:15px;margin-top:20px">
+          {% csrf_token %}
+          <div class="input-field col s8 offset-s2">
+            <input id="u_nom" type="text" name="username">
+            <label for="u_nom">Nombre de Usuario</label>
           </div>
-
-        </main>
-    </body>
-    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+          <div class="input-field col s8 offset-s2">
+            <input id="u_pass" type="password" name="password">
+            <label for="u_pass">Contraseña</label>
+          </div>
+          <div class="center">
+            {% if request.path != '/login/' %}
+            <a id="cancel" class="waves-effect waves-light btn red accent-3" href="{% url 'webPage:login' %}">Soy Administrador</a>
+            <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Activar Sesion</button>
+            {% else %}
+            <a id="cancel" class="waves-effect waves-light btn red accent-3" href="{% url 'webPage:activatingUser' %}">Soy Usuario</a>
+            <button class="btn waves-effect waves-light light-green accent-4" type="submit" name="action">Entrar como administrador</button>
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 </html>

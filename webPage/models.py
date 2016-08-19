@@ -73,8 +73,9 @@ class Rule(models.Model):
 
 
 class RuleList(models.Model):
-    privilegeAsigned = models.ForeignKey(Privilege, models.DO_NOTHING, db_column='privilegeAsigned', blank=True, null=True)  # Field name made lowercase.
+    privilegeAsigned = models.ForeignKey(Privilege, models.DO_NOTHING, db_column='privilegeAsigned', blank=True, primary_key=True)  # Field name made lowercase.
     ruleAsigned = models.ForeignKey(Rule, models.DO_NOTHING, db_column='ruleAsigned', blank=True, null=True)  # Field name made lowercase.
+
 
     class Meta:
         managed = False
