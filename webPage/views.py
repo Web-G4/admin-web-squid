@@ -58,8 +58,6 @@ def listReglas(request):
     context = RequestContext(request)
     reglas = Rule.objects.all()
     lista = RuleList.objects.all()
-    #lista = RuleList.getObject(id=idLista)
-    #reglas = lista.ruleasigned
     return render_to_response('listReglas.html',{'reglas':reglas,'lista':lista},context)
 
 #@login_required(login_url='/login/')
