@@ -1,10 +1,10 @@
 import MySQLdb
 import os
 
-ROUTE = "/etc/squid3/seawall/users/"
+ROUTE = "/etc/squid/seawall/users/"
 #ROUTE = "/home/pi/ftp/Script/users/"
 
-db = MySQLdb.connect(host='localhost', user='root',passwd='squid',
+db = MySQLdb.connect(host='localhost', user='root',passwd='grupo2',
  db='SEAWALL' )
 
 cur = db.cursor()
@@ -40,5 +40,4 @@ for u in ActiveUser:
         user = open(ROUTE+userPrivilege,"a")
     user.write(u[1]+"\n")
     user.close()
-os.system("squid3 -k reconfigure")
 print("Done.")

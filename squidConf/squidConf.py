@@ -12,11 +12,11 @@ def zeroFill(number):
 import MySQLdb
 
 #ROUTE = "/home/pi/ftp/Script/"
-ROUTE = "/etc/squid3/"
+ROUTE = "/etc/squid/"
 ROUTE_USER = ROUTE+"seawall/users/"
 ROUTE_CONTENT = ROUTE+"seawall/content/"
 
-db = MySQLdb.connect(host='localhost', user='root',passwd='squid',
+db = MySQLdb.connect(host='localhost', user='root',passwd='grupo2',
  db='SEAWALL' )
 
 cur = db.cursor()
@@ -96,7 +96,7 @@ http_access allow localhost
 http_access deny all
 http_port 3128
 
-coredump_dir /var/spool/squid3
+coredump_dir /var/spool/squid
 
 refresh_pattern ^ftp:		1440	20%	10080
 refresh_pattern ^gopher:	1440	0%	1440
@@ -124,6 +124,10 @@ for p in Privilege:
 
 #ACCESS - Section
 main += "\n\n\n\n### ACCESS SECTION ###\n\n"
+main += """
+acl djangoServer dst 192.168.100.100
+http_access allow djangoServer
+"""
 for p in Privilege:
     main += "\n\n#ACCESS - " + p[0]
     ruleCounter = 1
@@ -141,8 +145,8 @@ for p in Privilege:
         main += "\nhttp_access deny all "+p[0]+"Ip"
     else:
         main += "\nhttp_access allow all "+p[0]+"Ip"
-                   
-                
+
+
 squidconf.write(header+main+footer)
 squidconf.close()
 print("Done.")
