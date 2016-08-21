@@ -8,6 +8,14 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+import os
+
+def squidConf():
+    os.system("python squidConf/squidConf.py")
+    os.system("python squidConf/listContents.py")
+    os.system("python squidConf/listIps.py")
+    os.system("squid -k reconfigure")
+
 def admin_log_in(request):
     context = RequestContext(request)
     if request.method == 'POST':
@@ -22,6 +30,7 @@ def admin_log_in(request):
                 pass
         else:
             pass
+        squidConf()
     return render_to_response('activation.html',context)
 
 def activatingUser(request):
@@ -44,6 +53,7 @@ def activatingUser(request):
                 print "No existe el usuario"
             except Surfer.MultipleObjectsReturned:
                 print "Muchos usuarios!!!"
+            squidConf()
         return render_to_response('activation.html',context)
 
 def get_client_ip(request):
@@ -108,6 +118,7 @@ def modRegla(request, rId):
         rule.rFrom =  datetime.strptime(request.POST['r_s_h'], '%d %m %Y %H:%M')
         rule.rTo = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
         rule.save()
+        squidConf()
     return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule},context)
 
 @login_required(login_url='/login/')
@@ -139,6 +150,7 @@ def addReglas(request):
         lista.privilegeAsigned = priv
         lista.ruleAsigned = rule
         lista.save()
+        squidConf()
     return render_to_response('addReglas.html',{'contenidos':contenidos,'privilegios':privileges},context)
 
 @login_required(login_url='/login/')
@@ -151,6 +163,7 @@ def addUsuario(request):
         sur.passField = request.POST['u_pass']
         sur.namePrivilege = Privilege.objects.get(namePrivilege=request.POST['u_priv'])
         sur.save()
+        squidConf()
     return render_to_response('addUsuario.html',{'privilegios':privileges},context)
 
 @login_required(login_url='/login/')
@@ -171,4 +184,5 @@ def listPrivilegios(request):
         else:
             priv.isBlock = False
         priv.save()
+        squidConf()
     return render_to_response('listPrivilegios.html',{'privilegios':privileges},context)

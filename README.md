@@ -11,14 +11,21 @@ Podría requerir instalar la siguiente dependencia (en ubuntu):
 
 Instalar dependencias de python con superusuario:
 
+    source /usr/local/bin/virtualenvwrapper_lazy.sh #Podria ser necesario
     sudo pip install -r requeriments.txt
-
-Si aparece el error "ImportError: No module named 'pip'" ejecutar:
-
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 Instalar squid y crear carpetas de seawall
 
     sudo apt install squid3
     sudo mkdir -p /etc/squid/seawall/content/
     sudo mkdir -p /etc/squid/seawall/users/
+
+Instalar mysql server y cargar archivo squid/Script/DB_SeaWall.sql:
+
+    mysql -u root -p < squid/Script/DB_SeaWall.sql
+
+Y si queres agrega dummy data:
+
+    mysql -u root -p < squid/Script/chargeDB.sql
+
+Estas obligado a correr el manage.py sobre el directorio del proyecto ya que si no el squidconf no funcionara (programacion de alta calidad)
