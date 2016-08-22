@@ -43,6 +43,7 @@ CONSTRAINT PK_ActiveUser PRIMARY KEY (idActiveUser),
 CONSTRAINT FK_ActiveUser_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(username));
 
 CREATE TABLE IF NOT EXISTS RuleList(
+idRuleList INT UNSIGNED AUTO_INCREMENT,
 privilegeAsigned VARCHAR(20),
 ruleAsigned INT UNSIGNED AUTO_INCREMENT,
 FOREIGN KEY (privilegeAsigned) REFERENCES Privilege(namePrivilege),
