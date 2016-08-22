@@ -37,7 +37,7 @@ CONSTRAINT PK_Rule PRIMARY KEY (idRule));
 
 CREATE TABLE IF NOT EXISTS ActiveUser(
 idActiveUser INT UNSIGNED AUTO_INCREMENT,
-ipSurfer INT UNSIGNED,
+ipSurfer VARCHAR(20),
 nameSurfer VARCHAR(20),
 CONSTRAINT PK_ActiveUser PRIMARY KEY (idActiveUser),
 CONSTRAINT FK_ActiveUser_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(username));
@@ -45,9 +45,10 @@ CONSTRAINT FK_ActiveUser_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(usern
 CREATE TABLE IF NOT EXISTS RuleList(
 idRuleList INT UNSIGNED AUTO_INCREMENT,
 privilegeAsigned VARCHAR(20),
-ruleAsigned INT UNSIGNED AUTO_INCREMENT,
+ruleAsigned INT UNSIGNED,
 FOREIGN KEY (privilegeAsigned) REFERENCES Privilege(namePrivilege),
-FOREIGN KEY (ruleAsigned) REFERENCES Rule(idRule));
+FOREIGN KEY (ruleAsigned) REFERENCES Rule(idRule),
+CONSTRAINT PK_RuleList PRIMARY KEY (idRuleList));
 
 CREATE TABLE IF NOT EXISTS Content(
 nameContent VARCHAR(30),
