@@ -1,10 +1,10 @@
 import MySQLdb
 import os
 
-ROUTE = "/etc/squid/seawall/content/"
+ROUTE = "/etc/squid3/seawall/content/"
 #ROUTE = "/home/pi/ftp/Script/content/"
 
-db = MySQLdb.connect(host='localhost', user='root',passwd='grupo2',
+db = MySQLdb.connect(host='localhost', user='root',passwd='squid',
  db='SEAWALL' )
 
 cur = db.cursor()
