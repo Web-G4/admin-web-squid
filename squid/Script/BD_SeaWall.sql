@@ -14,19 +14,19 @@ DROP TABLE IF EXISTS RuleList;
 #CREANDO TABLAS
 
 CREATE TABLE IF NOT EXISTS Privilege(
-namePrivilege VARCHAR(128),
+namePrivilege VARCHAR(20),
 isBlock BOOLEAN,
 CONSTRAINT PK_Privilege PRIMARY KEY (namePrivilege));
 
 CREATE TABLE IF NOT EXISTS Surfer(
-username VARCHAR(128),
-pass VARCHAR(128),
-namePrivilege VARCHAR(128) NOT NULL,
+username VARCHAR(20),
+pass VARCHAR(20),
+namePrivilege VARCHAR(20) NOT NULL,
 CONSTRAINT PK_Surfer PRIMARY KEY (username),
 CONSTRAINT FK_Surfer_Privilege FOREIGN KEY (namePrivilege) REFERENCES Privilege(namePrivilege));
 
 CREATE TABLE IF NOT EXISTS Rule(
-nameURL VARCHAR(128),
+nameURL VARCHAR(50),
 idRule INT UNSIGNED AUTO_INCREMENT,
 isContent BOOLEAN,
 description TEXT,
@@ -37,18 +37,20 @@ CONSTRAINT PK_Rule PRIMARY KEY (idRule));
 
 CREATE TABLE IF NOT EXISTS ActiveUser(
 idActiveUser INT UNSIGNED AUTO_INCREMENT,
-ipSurfer VARCHAR(15),
-nameSurfer VARCHAR(128),
+ipSurfer VARCHAR(20),
+nameSurfer VARCHAR(20),
 CONSTRAINT PK_ActiveUser PRIMARY KEY (idActiveUser),
 CONSTRAINT FK_ActiveUser_Surfer FOREIGN KEY (nameSurfer) REFERENCES Surfer(username));
 
 CREATE TABLE IF NOT EXISTS RuleList(
-privilegeAsigned VARCHAR(128),
+idRuleList INT UNSIGNED AUTO_INCREMENT,
+privilegeAsigned VARCHAR(20),
 ruleAsigned INT UNSIGNED,
 FOREIGN KEY (privilegeAsigned) REFERENCES Privilege(namePrivilege),
-FOREIGN KEY (ruleAsigned) REFERENCES Rule(idRule));
+FOREIGN KEY (ruleAsigned) REFERENCES Rule(idRule),
+CONSTRAINT PK_RuleList PRIMARY KEY (idRuleList));
 
 CREATE TABLE IF NOT EXISTS Content(
-nameContent VARCHAR(128),
+nameContent VARCHAR(30),
 urlList TEXT,
 CONSTRAINT PK_Content PRIMARY KEY (nameContent));
