@@ -25,6 +25,7 @@ def admin_log_in(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                squidConf()
                 return redirect('/listaDeUsuarios/')
             else:
                 pass
@@ -48,12 +49,13 @@ def activatingUser(request):
                 activated.nameSurfer = surfer
                 activated.ipSurfer = client_address
                 activated.save()
+                squidConf()
                 return render_to_response('navegacion.html',{'user': activated},context)
             except Surfer.DoesNotExist:
                 print "No existe el usuario"
             except Surfer.MultipleObjectsReturned:
                 print "Muchos usuarios!!!"
-            squidConf()
+        squidConf()
         return render_to_response('activation.html',context)
 
 def get_client_ip(request):
