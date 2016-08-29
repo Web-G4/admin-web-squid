@@ -111,9 +111,9 @@ for p in Privilege:
     main += "\nacl "+p[0]+"Ip src \""+ROUTE_USER+p[0]+"\"\n"
     ruleCounter = 1
     for acl in RuleList:
-        if acl[0] == p[0]:
+        if acl[1] == p[0]:
             for rule in Rule:
-                if acl[1] == rule[1]:
+                if acl[2] == rule[1]:
                     main += "\nacl "+p[0]+"Rule"+str(ruleCounter)+"Time time MTWHF "+formatTime(rule[5])+"-"+formatTime(rule[6])
                     if rule[2] == 1:
                         main += "\nacl "+p[0]+"Rule"+str(ruleCounter)+"NameURL url_regex -i \""+ROUTE_CONTENT+rule[0]+"\"\n"
@@ -132,9 +132,11 @@ for p in Privilege:
     main += "\n\n#ACCESS - " + p[0]
     ruleCounter = 1
     for acl in RuleList:
-        if acl[0] == p[0]:
+        print(acl, p)
+        if acl[1] == p[0]:
             for rule in Rule:
-                if acl[1] == rule[1]:
+                print("RULE",acl,rule)
+                if acl[2] == rule[1]:
                     if rule[4] == 1:
                         allow = "allow"
                     else:
