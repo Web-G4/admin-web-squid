@@ -12,11 +12,11 @@ def zeroFill(number):
 import MySQLdb
 
 #ROUTE = "/home/pi/ftp/Script/"
-ROUTE = "/etc/squid/"
+ROUTE = "/etc/squid3/"
 ROUTE_USER = ROUTE+"seawall/users/"
 ROUTE_CONTENT = ROUTE+"seawall/content/"
 
-db = MySQLdb.connect(host='localhost', user='root',passwd='grupo2',
+db = MySQLdb.connect(host='localhost', user='root',passwd='squid',
  db='SEAWALL' )
 
 cur = db.cursor()
@@ -125,7 +125,7 @@ for p in Privilege:
 #ACCESS - Section
 main += "\n\n\n\n### ACCESS SECTION ###\n\n"
 main += """
-acl djangoServer dst 192.168.100.100
+acl djangoServer dst 192.168.1.103
 http_access allow djangoServer
 """
 for p in Privilege:
