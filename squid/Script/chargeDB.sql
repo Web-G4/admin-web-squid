@@ -34,13 +34,13 @@ kat.cr
 video");
 
 insert into RuleList values
-("OperarioPrensa", 1, 0);
+(1, "OperarioPrensa", 1);
 insert into RuleList values
-("OperarioPrensa", 2, 1);
+(2, "OperarioPrensa", 2);
 insert into RuleList values
-("OperarioPrensa", 3, 2);
+(3, "OperarioPrensa", 3);
 insert into RuleList values
-("OperarioMantenimiento", 3, 3);
+(4, "OperarioMantenimiento", 3);
 
 
 insert into Surfer values
