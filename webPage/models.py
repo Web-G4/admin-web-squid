@@ -84,7 +84,7 @@ class RuleList(models.Model):
         verbose_name_plural = 'Listas de Reglas'
 
     def __str__(self):
-        return self.nameURL
+        return str(self.idRuleList)
 
 class Surfer(models.Model):
     username = models.CharField(primary_key=True, max_length=128)
