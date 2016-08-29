@@ -23,11 +23,11 @@ Reglas
                 <td>{{regla.nameURL}}</td>
                 <td>{{regla.description}}</td>
                 <td>
-                  {% for l in lista %}
-                  {% if regla == l.ruleAsigned %}
-                  {{l.privilegeAsigned}}
-                  {% endif %}
-                  {% endfor %}
+                    {% for r in lista %}
+                    {% if regla == r.ruleAsigned %}
+                    {{r.privilegeAsigned}}
+                    {% endif %}
+                    {% endfor %}
                 </td>
                 {% if regla.allow %}
                 <td><input type="checkbox" disabled checked id="check-{{regla.idRule}}"/><label for="check-{{regla.idRule}}"></label></td>
