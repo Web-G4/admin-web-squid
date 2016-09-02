@@ -118,7 +118,7 @@ for p in Privilege:
                     if rule[2] == 1:
                         main += "\nacl "+p[0]+"Rule"+str(ruleCounter)+"NameURL url_regex -i \""+ROUTE_CONTENT+rule[0]+"\"\n"
                     else:
-                        main += "\nacl "+p[0]+"Rule"+str(ruleCounter)+"NameURL dstdomain "+rule[0]+"\n"
+                        main += "\nacl "+p[0]+"Rule"+str(ruleCounter)+"NameURL url_regex "+rule[0]+"\n"
                     ruleCounter+=1
 
 
