@@ -129,6 +129,7 @@ def addReglas(request):
     privileges = Privilege.objects.all()
     if request.method == 'POST':
         rule = Rule()
+        print "is: "+str(request.POST['r_w'])
         if request.POST['r_w']:
             print request.POST['r_name']
             rule.nameURL = request.POST['r_name']
