@@ -11,12 +11,12 @@ Contenido
   <div class="row">
       <form action="{% url 'webPage:addContenido' %}" method="POST" enctype="multipart/form-data" class="card col s10 offset-s1 blue-grey lighten-5" style="padding:15px;margin-top:20px">
           {% csrf_token %}
-          <div class="input-field col s8 offset-s2">
+          <div class="input-field col s12">
               <input id="c_nom" type="text" name="c_nom">
               <label for="c_nom">Nombre del contenido</label>
           </div>
-          <div class="input-field col s8 offset-s2">
-              <textarea id="c_text" name="c_text"></textarea>
+          <div class="input-field col s12">
+              <textarea id="c_text" name="c_text" class="materialize-textarea"></textarea>
               <label for="c_text">Lista de URLS</label>
           </div>
           <div class="center col s8 offset-s2">
