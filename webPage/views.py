@@ -192,6 +192,7 @@ def listPrivilegios(request):
 
 @login_required(login_url='/login/')
 def addContenido(request):
+    context = RequestContext(request)
     if request.method=='POST':
         cont = Content()
         cont.nameContent = request.POST['c_nom']
