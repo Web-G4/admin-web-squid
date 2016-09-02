@@ -108,8 +108,8 @@ def modRegla(request, rId):
             rule.nameURL = request.POST['r_name']
             rule.isContent = False
         else:
-            print request.POST['r_desc']
-            rule.nameURL = request.POST['r_desc']
+            print request.POST['r_cont']
+            rule.nameURL = request.POST['r_cont']
             rule.isContent = True
         if request.POST.getlist('r_is')==[u'1']:
             rule.allow = True
@@ -134,8 +134,8 @@ def addReglas(request):
             rule.nameURL = request.POST['r_name']
             rule.isContent = False
         else:
-            print request.POST['r_desc']
-            rule.nameURL = request.POST['r_desc']
+            print request.POST['r_cont']
+            rule.nameURL = request.POST['r_cont']
             rule.isContent = True
         if request.POST.getlist('r_is')==[u'1']:
             rule.allow = True
