@@ -4,7 +4,7 @@ from webPage import views
 urlpatterns = [
     url(r'listaDeUsuarios/$', views.listUsuarios, name='listUsuarios'),
     url(r'listaDeUsuariosActivos/$', views.listActiveUsers, name='listActiveUsers'),
-    #url(r'^kick/(?P<idAU>[0-9]+)/$', views.kickUser, name='kickUser'),
+    url(r'^kick/(?P<idAU>[0-9]+)/$', views.kickUser, name='kickUser'),
     url(r'listReglas/$', views.listReglas, name='listReglas'),
     url(r'listPrivilegios/$', views.listPrivilegios, name='listPrivilegios'),
     url(r'addReglas/$', views.addReglas, name='addReglas'),
