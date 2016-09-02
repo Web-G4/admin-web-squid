@@ -99,6 +99,7 @@ def delRegla(request, rId):
 @login_required(login_url='/login/')
 def modRegla(request, rId):
     context = RequestContext(request)
+    privileges = Privilege.objects.all()
     contenidos = Content.objects.all()
     rule = Rule.objects.get(idRule = rId)
     if request.method == 'POST':
@@ -119,7 +120,7 @@ def modRegla(request, rId):
         rule.rTo = datetime.strptime(request.POST['r_f_h'], '%d %m %Y %H:%M')
         rule.save()
         squidConf()
-    return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule},context)
+    return render_to_response('modRegla.html',{'contenidos':contenidos,'regla':rule, 'privilegios':privileges},context)
 
 @login_required(login_url='/login/')
 def addReglas(request):
