@@ -13,10 +13,10 @@ Modificar Regla {{regla.idRule}}
             {% csrf_token %}
             <input type="text" hidden value="{% if regla.isContent %}0{% else %}1{% endif %}" id="w" name="r_w">
             <div class="droptrigger input-field col s8" id="url">
-                <input id="r_name" type="text" class="validate formy" name="r_name" value="{% if not regla.isContent %} {{regla.nameURL}} {% endif %}">
+                <input id="r_name" type="text" class="validate formy" style="{% if not regla.isContent %}display: block{% else %}display: none{% endif %}" name="r_name" value="{% if not regla.isContent %} {{regla.nameURL}} {% endif %}">
                 <label for="r_name">URL</label>
             </div>
-            <div id="contenido" class="input-field col s8" style="display: none">
+            <div id="contenido" class="input-field col s8" style="{% if regla.isContent %}display: block{% else %}display: none{% endif %}">
                 <select name="r_cont">
                     <option value="hola" disabled>Seleccione un Contenido</option>
                     {% for contenido in contenidos %}
