@@ -103,12 +103,13 @@ def modRegla(request, rId):
     contenidos = Content.objects.all()
     rule = Rule.objects.get(idRule = rId)
     if request.method == 'POST':
-        if request.POST['r_w']:
+        print "is: "+str(request.POST['r_w'])
+        if int(request.POST['r_w']):
             print request.POST['r_name']
             rule.nameURL = request.POST['r_name']
             rule.isContent = False
         else:
-            print request.POST['r_cont']
+            print " hola "+request.POST['r_cont']
             rule.nameURL = request.POST['r_cont']
             rule.isContent = True
         if request.POST.getlist('r_is')==[u'1']:
@@ -130,12 +131,12 @@ def addReglas(request):
     if request.method == 'POST':
         rule = Rule()
         print "is: "+str(request.POST['r_w'])
-        if request.POST['r_w']:
+        if int(request.POST['r_w']):
             print request.POST['r_name']
             rule.nameURL = request.POST['r_name']
             rule.isContent = False
         else:
-            print request.POST['r_cont']
+            print " hola "+request.POST['r_cont']
             rule.nameURL = request.POST['r_cont']
             rule.isContent = True
         if request.POST.getlist('r_is')==[u'1']:
