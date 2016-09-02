@@ -84,7 +84,8 @@ def kickUser(request, idAU):
     context = RequestContext(request)
     user = ActiveUser.objects.get(idActiveUser = idAU)
     user.delete()
-    users = Rule.objects.all()
+    users = ActiveUser.objects.all()
+    squidConf()
     return render_to_response('listActiveUsers.html',{'users': users},context)
 
 @login_required(login_url='/login/')
@@ -198,4 +199,5 @@ def addContenido(request):
         cont.nameContent = request.POST['c_nom']
         cont.urlList = request.POST['c_text']
         cont.save()
+        squidConf()
     return render_to_response('contenido.html',context)
