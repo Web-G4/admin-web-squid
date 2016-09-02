@@ -132,10 +132,8 @@ for p in Privilege:
     main += "\n\n#ACCESS - " + p[0]
     ruleCounter = 1
     for acl in RuleList:
-        print(acl, p)
         if acl[1] == p[0]:
             for rule in Rule:
-                print("RULE",acl,rule)
                 if acl[2] == rule[1]:
                     if rule[4] == 1:
                         allow = "allow"
