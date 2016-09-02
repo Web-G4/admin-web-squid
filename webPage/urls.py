@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'login/$', views.admin_log_in, name='login'),
     url(r'^modRegla/(?P<rId>[0-9]+)/$', views.modRegla, name='modRegla'),
     url(r'^delRegla/(?P<rId>[0-9]+)/$', views.delRegla, name='delRegla'),
+    url(r'addContenido/$', views.addContenido, name='addContenido')
     #url(r'^readytogo/$', views.logSucceed, name='navegacion'),
     #url(r'listaDeUsuarios/$', views.listaDeUsuarios, name='listaDeUsuarios'),
 ]

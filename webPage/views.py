@@ -189,3 +189,12 @@ def listPrivilegios(request):
         priv.save()
         squidConf()
     return render_to_response('listPrivilegios.html',{'privilegios':privileges},context)
+
+@login_required(login_url='/login/')
+def addContenido(request):
+    if request.method=='POST':
+        cont = Content()
+        cont.nameContent = request.POST['c_nom']
+        cont.urlList = request.POST['c_text']
+        cont.save()
+    return render_to_response('contenido.html',context)
